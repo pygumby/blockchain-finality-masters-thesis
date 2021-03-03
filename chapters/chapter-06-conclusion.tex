@@ -1,0 +1,40 @@
+As blockchain systems are increasingly considered to underpin wholesale payment systems, this thesis set out to clarify whether and how blockchain-based payment systems achieve final settlement.
+This question is of particular importance as the ability to achieve settlement finality has a direct impact on the exposure to settlement risks incurred by those system's participants.
+
+In the first part of this thesis, a coherent definition of finality was derived from the literature.
+Based on an analysis of the Herstatt incident in the realm of FX, a preliminary account of finality was given, characterizing finality as irrevocable settlement in the sense that a transaction can no longer be rescinded or reversed.
+Said recinding or reversal is assumed to be due to legal reasons, since the Herstatt incident was a direct effect of the enforcement of German insolvency law.
+
+Said notion of finality turned out to not only apply to FX systems but to payment systems as a whole.
+It was analyzed under which circumstances competent authorities may challenge and reverse transactions or transfer orders in DNS and RTGS systems.
+Due to longer settlement cycles with DNS compared to RTGS, transfer orders are more likely to be cherry picked from a DNS system's netting, causing the unwinding of the latter.
+Thus, RTGS systems are favorable in terms of settlement risks, however, as they process transfer orders individually, they also come at a higher cost.
+
+The SFD was examined as an example of how legislation may enable payment systems to achieve finality.
+It does so mainly by limiting the effects of other legislation that might interfere with final settlement, e.g., by shielding netting calculations, transfer orders and settlement accounts from legal impact.
+
+Ultimately, finality was as defined as a legal construct, constituting the point in time after which a transaction can no longer be rescinded or reversed.
+Such notion was compared to other finality definitions from the literature, in the course of which it was clearly differentiated from obligation finality and interpretations specific to traditional banking infrastructures.
+
+In the second part of this thesis, it was examined whether blockchain systems can provide finality as it was defined before, i.e., in the sense of legal finality.
+Since whether or not a payment system provides legal finality largely depends on its regulatory context, two complimentary approaches to regulating blockchain technology were introduced, i.e., indirect regulation, where it is those who interact with a technology that are regulated, as opposed to direct regulation, where governments exert influence on a system directly. 
+
+It was then concluded that a payment system, including a blockchain-based payment system, can only provide legal finality if it -- and with it the transactions it processes -- falls under the protections of legislation such as the SFD.
+It was analyzed whether such a system qualifies as a payment system under the SFD's definition, which it does not, which, in turn, is why it was concluded that such systems cannot guarantee legal finality.
+
+However, the reason why blockchain systems do not conform to said definition is not only due to the fact that their decentralized structure makes them intangible in the sense that they have no legally liable operator or physically tangible location.
+It was also established that the Articles of the SFD implicitly assume a notion of technical finality, defined as a discrete point in time after which a transaction is permanently recorded in the sense that it is not rolled back by the underlying database, which can be taken for granted in traditional payment systems based on centralized technology but, so the claim, cannot be achieved with blockchain technology.
+
+In the third part of this thesis, this claim was validated, i.e., it was examined whether blockchain systems actually cannot provide this novel notion of technical finality.
+With regards to Bitcoin-like blockchain systems, it was shown that since transaction reversal is an integral part of the PoW consensus algorithm, such systems can only ever provide probabilistic finality.
+However, it was pointed out that with Stellar, a blockchain system exists that can provide absolute finality and therefore satisfy the requirement of technical finality.
+
+The critical difference between PoW and Stellar's consensus algorithm SCP was identified in their classification according to the CAP theorem, which states that a distributed system has to sacrifice either consistency or availability.
+For payment systems, prioritizing consistency, which is the choice in SCP, was identified to be the right choice.
+
+In conclusion, it can be stipulated that settlement finality, defined as the irreversibility of a transaction, is traditionally seen as a legal concept, whereas with the emergence of blockchain-based payment systems, a technical interpretation of the concept becomes necessary as well.
+Due to their decentralized nature, such systems systems do, at the time of this writing, not fall under the auspices of legislation such as the SFD, which is why they are unlikely to provide legal finality.
+PoW-based blockchain systems, i.e., blockchain systems in their most common form, definitely do not provide technical finality, as they achieve probabilistic finality at best.
+However, blockchain systems employing alternative consensus algorithms, e.g., Stellar's SCP, do provide absolute finality.
+
+The key take-away point is that once regulators adapt legislation such as the SFD to encompass blockchain-based payment systems, and if such systems provide technical finality, e.g., as Stellar does -- both of which is in the realm of possible -- blockchain-based payment systems can provide settlement finality and are, in this sense, perfectly suitable to underpin large-value payment systems.

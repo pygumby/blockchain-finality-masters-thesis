@@ -1,0 +1,413 @@
+This chapter briefly introduces the terms and concepts on which this thesis is based and the knowledge of which is necessary for understanding it.
+Relevant parts from the banking domain of traditional payments are introduced, followed by relevant parts from the computer science domain of blockchain technology.
+
+\section{Traditional payments}
+
+In the following, relevant aspects from the banking domain of traditional payments are introduced, namely payment systems, settlement risks and foreign exchange.
+
+\subsection{Payment systems}
+
+A payment system is a ``set of instruments, procedures and rules for the transfer of funds between or among participants,'' whose scope encompasses ``the participants and the entity operating the arrangement.'' \autocite[13]{cpmi2016}
+
+Payment systems are distinguished into those that facilitate retail payments, processing large volumes of low-value payments relating ``to the purchase of goods and services by consumers and businesses,'' and those that facilitate wholesale payments, processing fewer large-value payments ``between financial institutions.'' \autocite[22]{bech2020}
+This thesis is concerned with the latter, specifically, those that are systemically important, i.e., wholesale payment systems that represent ``a major channel by which shocks can be transmitted across domestic and international financial systems and markets.'' \autocite[1]{cpmi2001}
+
+At the heart of a payment system are its clearing and settlement mechanisms (CSM).
+It is to be noted that although CSMs are oftentimes referred to as an entity, clearing and settlement are usually carried out by systems that are independent entities both technically and legally.
+
+The functions of clearing cover ``all activities from the time a transaction [...] is made until it is finally settled.'' \autocite[6]{loeber2006}
+Clearing is, therefore, concerned with the ``transmission of the [t]ransfer [o]rder message,'' \autocite[21]{vereecken2003} i.e., with the transmission of information.
+The functions of settlement enable ``the process of transferring funds to discharge monetary obligations between two or more parties.'' \autocite[23]{bech2020}
+Settlement is, therefore, concerned with the actual ``transfer of value.'' \autocite[21]{vereecken2003}
+
+Payment systems are further distinguished into those that settle on a net basis and those that settle on a gross basis.
+There also exist hybrid systems that combine both approaches. \autocite[27]{cpmi2001}
+
+Settlement on a net basis is preceded by the process of netting, which is a clearing function.
+Netting is ``[t]he offsetting of obligations between or among participants in the netting arrangement'' \autocite[12]{cpmi2016}, which is commonly explained \autocites[39]{vereecken2003}[21-24]{megue2018} using an example similar to the following:
+
+\begin{enumerate}
+   \item At 10:00, participant A transfers 8,000€ to participant B.
+   \item At 13:00, participant A transfers 5,000€ to participant B.
+   \item At 16:00, participant B transfers 3,000€ to participant A.
+\end{enumerate}
+
+At the three designated times, no actual value is transferred, as clearing is concerned with information only.
+Instead, a net settlement position, which is defined as the ``net position at settlement time,'' \autocite[38]{vereecken2003} is calculated.
+Participant A ends up with a net debit position of 10,000€, participant B with a net credit position of 10,000€.
+Those are settled, i.e., value is transferred, at settlement time, which, ``[t]ypically,'' is ``at the end of the day,'' \autocite[38]{vereecken2003} resulting in a total of two actual value transfers.
+
+This is an example of bilateral netting, as there are only two participants.
+The offsetting of obligations between two or more participants is referred to as multilateral netting.
+
+While settlement on a net basis is a form of batch processing, settlement on a gross basis corresponds to unitary processing, as gross settlement is ``the settlement of transfer instructions [...] individually on a transaction-by-transaction basis for full value.'' \autocite[9]{cpmi2016}
+If the transactions in the previous netting example were to be settled on a gross basis, all three transfers would be settled individually, on or at some point after 10:00, 13:00 and 16:00, respectively, as settlement happens at ``discrete intervals during the day.'' \autocite[38]{vereecken2003}
+
+A settlement system that settles on a net basis is referred to as a deferred net settlement (DNS) system.
+One that settles on a gross basis is referred to as a real-time gross settlement (RTGS) system. \autocite[26]{cpmi2001}
+It is to be noted that \enquote{the term \enquote{real-time} can be misleading, as the settlement is not [by definition] \enquote{immediate.}} \autocite[38]{vereecken2003}
+The advantages and disadvantages of either approach are discussed later in this thesis.
+
+As mentioned, the functions of a payment system are commonly carried out by independent parties.
+This is reflected in the definition of a payment system used in EU legislation, which considers such a system a ``formal arrangement'' between ``participants.'' \autocite{eu1998}
+Such participants are ``institutions,'' which use the system to clear and settle transfer orders among each other, and ``settlement agents,'' which provide accounts through which the transfer orders are settled. \autocite{eu1998}
+Participants can, furthermore, be clearing houses and central counterparties, which need to be discussed in their own right, as they are crucial in the context of clearing.
+
+A clearing house (CH), as its name suggests, provides ``clearing services'' in a ``multilateral [...] arrangement.'' \autocite[4]{cpmi2016}
+If netting is applied, one of these services is the calculation of the net settlement positions of the participants.
+Without a CH in between them, participants themselves would have to keep track of their positions regarding every other participant, resulting in an ``extremely impractical,'' ``fully-connected network topology.'' \autocite[23]{megue2018}
+
+In this capacity, a CH oftentimes acts as a central counterparty (CCP) as it ``interposes itself between counterparties [...], becoming the buyer to every seller and the seller to every buyer'' \autocite[3]{cpmi2016} in a system.
+In other words, when a participant receives a credit transaction, it considers the CCP to owe it money, in case of a debit transaction, it considers that it owes money to the CCP. \autocite[24]{megue2018}
+
+\subsection{Settlement risks}
+
+Settlement finality or, for short, finality is commonly discussed in the context of settlement risks arising from the lack thereof, i.e., from the inability to achieve finality.
+Therefore, any discussion on the different accounts of finality in the literature must be preceded by a definition of settlement risks.
+
+As a ``general term,'' settlement risk is broadly defined as ``the risk that settlement in a funds or securities transfer system will not take place as expected.'' \autocite[17]{cpmi2016}
+Settlement risk can, however, be differentiated into different kinds, as there are multiple ``risks [that] can arise in payment systems'' \autocite[5]{cpmi2001} that can be considered settlement risks.
+
+Such risks include credit risk (or principal risk), which is ``the risk that a party within the system will be unable fully to meet its financial obligations within the system either when due or at any time in the future,'' and liquidity risk, which is ``the risk that a party within the system will have insufficient funds to meet financial obligations within the system as and when expected, although it may be able to do so at some time in the future.'' \autocite[5]{cpmi2001}
+
+A downstream effect of the aforementioned settlement risks, systemic risk is ``the risk that the inability of one of the participants to meet its obligations, or a disruption in the system itself, could result in the inability of other system participants [...] to meet their obligations as they become due.'' \autocite[5]{cpmi2001}
+``Such a failure could [...] threaten the stability of the system or of financial markets.'' \autocite[5]{cpmi2001}
+
+\subsection{Foreign exchange}
+
+Furthermore, discussions on finality, including this thesis, commonly take a detour into the foreign exchange market, which must, therefore, be elaborated on as well.
+
+The foreign exchange (FX) market ``is the market in which foreign currency [...] is traded for domestic currency [...],'' however, ``[t]his `market' is not in a centralized location; instead, it is a decentralized network that is [...] highly integrated via modern [IT] technology.'' \autocite{frankel2020}
+``At its core, settlement of a foreign exchange [...] trade requires the payment of one currency and the receipt of another.'' \autocite[4]{cpmi1996}
+Accordingly, an FX trade is made up of two legs, where one leg refers to the transfer of one currency from participant A to participant B and the other leg, inversely, refers to the transfer of another currency from participant B to participant A.
+
+\section{Blockchain technology}
+
+In the following, relevant aspects from the computer science domain of blockchain technology are introduced, namely the double-spending problem, proof of work, smart contracts and permissioned blockchains.
+
+\subsection{Double-spending problem}
+
+The very first blockchain system is Bitcoin and its creator, who operates under the pseudonym Satoshi Nakamoto and published the original Bitcoin paper in 2008 \autocite{nakamoto2008}, is considered the inventor of blockchain technology.
+
+Before delving into how blockchain technology works, it is crucial to clarify what problem it actually solves, especially since so many misleading analogies and, frankly, falsehoods with regards to this, e.g., claims such as ``works like gold mining,'' circulate among the wider public.
+
+The Bitcoin paper considers Bitcoin ``a solution to the double-spending problem using a peer-to-peer network.'' \autocite[1]{nakamoto2008}
+To be perfectly clear, it is that -- previously unresolved -- double-spending problem, a computer science problem, whose solution is the main contribution of Bitcoin and, consequently, blockchain technology.
+
+As the double-spending problem arises in decentralized networks, it is necessary to first define the latter before introducing the double-spending problem itself.
+
+A decentralized network in the sense of the Bitcoin network is a peer-to-peer (P2P) network consisting of peers or nodes, i.e., computers, that form a network through point-to-point connections.
+However, not every node is connected to every other node directly, thus, a path between two nodes may include intermediary nodes.
+Most importantly, all of the nodes are equally privileged, i.e., all of them have the same rights and obligations.
+From this follows that no node (or cluster of nodes) acts as a central party (or trusted party) in any capacity, i.e., there is no single source of truth or gatekeeper.
+From the latter follows that nodes may join and leave the network freely at all times.
+
+In such networks, network partitioning (or network split) may occur, which happens when there is no longer a connection between two or more clusters of nodes.
+A means of communication between nodes is network flooding, whereby one node broadcasts a message to all the nodes it is connected with or aware of, which, in turn, do the same, and so forth.
+Eventually, the message will have reached every node in the network, i.e., it will have propagated the network.
+
+A centralized network is, by contrast, characterized by the existence of a central party, which, oftentimes, acts as a single source of truth and gatekeeper.
+Furthermore, in many cases, nodes communicate exclusively through said central party and not in a peer-to-peer fashion, forming a star-shaped network.
+The obvious criticism of centralized networks is that a central party represents a single point of failure, since the very functionality of such networks depends on it.
+Moreover, there is a temptation for those who control the central party to abuse this power.
+
+% A simplistic payment system based on a decentralized network
+The double-spending problem is probably best explained by first demonstrating how it does not arise in centralized systems.
+To this end, assume a simplistic payment system consisting of one central party, i.e., the bank, as well as participants, i.e., bank customers.
+The central party maintains a ledger, i.e., a record of all transactions between the participants.
+From the ledger, each participant's balance of tokens, which might, e.g., represent (crypto) currency or a securities, can be derived.
+This model, obviously, corresponds to a centralized network, as the central party's node is the single source of truth (and, possibly, gatekeeper) and participant's nodes are second-class nodes that communicate with the former.
+
+% The attempt to double spend in a centralized network
+Furthermore, assume a fraudulent participant A who intends to spend one and the same token twice.
+To this end, participant A prepares two transfer orders (or transactions, which is the common terminology in the blockchain domain) each transferring said token to participants B and C, respectively.
+Participant A digitally, i.e., cryptographically, signs the transactions, thereby signaling their authenticity, allowing every other node to validate that the transactions truly come from participant A, the token's righteous owner.
+
+Of course, both transactions are valid when considered individually but, obviously, may not both be executed.
+The node representing participant A sends the two transactions to the node representing the central party, which will process which ever one arrives first and update the ledger according to that one.
+When the other transaction arrives, it will simply be discarded, as the previously updated ledger indicates that participant A is no longer the owner of the token and, therefore, cannot -- again -- spend it.
+Thus, participant A's attempt to double spend is unsuccessful.
+
+The attempt to double spend is, however, not so easily averted if said payment system is implemented atop a decentralized network.
+In this case, the role of the central party, i.e., the bank, is represented by every node in the network, i.e., by the network as a whole.
+Accordingly, each node maintains its own copy of the ledger.
+In addition, each node assumes the role of a participant, i.e., a bank customer, as well, given that each node broadcasts its own transactions to the nodes it is aware of, which will then be forwarded until they have propagated the network.
+
+In order to double spend, participant A, once again, sends out the two previously described transactions.
+Some of the nodes first receive the transaction that transfers the token to participant B and update their ledgers accordingly, while other nodes first receive the transaction that transfers it to participant C and update their ledger according to the latter transaction.
+Whether, at this point, participant A's attempt to double spend was successful is a matter of debate, what is clear, however, is that the bank or, rather, the payment system, which, as said, is represented by all nodes as a whole, is broken, since the individual ledgers it consists of are inconsistent.
+
+The challenge to solve the double-spending problem, therefore, is really the challenge to get the nodes of a decentralized network, which -- it must be emphasized -- represent a fluent set of nodes, to reach agreement (or consensus) on one value.
+In the case of payment systems such as Bitcoin, the value on which consensus must be reached is the ledger, i.e., the order of transactions.
+
+\subsection{Proof of work}
+
+As mentioned before, the Bitcoin paper proposes the Bitcoin system as ``a solution to the double-spending problem.'' \autocite[1]{nakamoto2008}
+Conceptually, the Bitcoin system corresponds to the decentralized payment system outlined before, although the Bitcoin system maintains coins (or bitcoins, spelled lowercase when referring to the cryptocurrency tokens rather than the system) and not generic tokens.
+
+The double-spending problem is solved by leveraging ``a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions.''
+That timestamp server can be understood as a piece of software that runs on every node that participates in the Bitcoin system.
+Collectively, the individual instances of the timestamp server form the distributed timestamp server that establishes the desired system-wide order of transactions.
+
+Each node running the timestamp server continuously receives transactions and ``collects'' these ``new transactions into a block'' or, rather, a continuous stream of blocks. \autocite[3]{nakamoto2008}
+For each new block, a node generates a hash, using a cryptographic hashing function.
+Such a function ``maps a typically large, variable-length value [in this case, a block] to a typically small, fixed-length value'' -- the hash. \autocite[6]{baerenfaenger2020a}
+The hash function is a ``one-way function,'' i.e., ``it is practically impossible to infer from the hash the input value.'' \autocite[6]{baerenfaenger2020a}
+The hash that was generated for the very first block in the Bitcoin system is, e.g., \texttt{000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b \\ 60a8ce26f}. \autocite{blockchaincom2020}
+A block's hash (or block hash) can be seen as proof of the block's existence, as ``the [block's] data must have existed at the time, obviously, in order to get [...] the hash [from it].'' \autocite[2]{nakamoto2008}
+
+However, the hash that the timestamp server generates for each new block is not derived from the block's data alone but from the block's data as well as the hash of its preceding block.
+Consequently, each block's hash references the previous block's hash, resulting in ``a chain'' \autocite[2]{nakamoto2008} of hashes, which represents the order of blocks as perceived by an individual node.
+
+In the Bitcoin paper, block hashes are referred to as ``timestamps'' \autocite{nakamoto2008} -- hence, the term timestamp server.
+One could argue that this is not the best choice of wording, as these do not capture time in the sense of date and time of day but rather establish a relative order of blocks.
+Be that as it may, such hashes or timestamps have an important property:
+As ``[e]ach timestamp includes the previous timestamp in its hash,'' ``each additional timestamp [is cryptographically] reinforcing the ones before it.'' \autocite[2]{nakamoto2008}
+In other words, if one were to tamper with a transaction in one block, not only would the hash of that block have to be regenerated but that of all subsequent blocks as well.
+Thus, the more blocks are appended to one block, the more computationally expensive it becomes to tamper with it.
+
+% Double-spending problem not yet solved
+Obviously, the system outlined up to this point does not yet solve the double-spending problem, as each individual node works on its own chain of blocks, based on (the order of) which ever transactions that node receives.
+What is missing is the actual consensus algorithm, which enables agreement on which one of the different chains of blocks is the definitive one.
+In other words, Bitcoin's consensus algorithm facilitates the consensus required to designate the Bitcoin system's blockchain.
+As a side note, it is to be pointed out that the term ``blockchain'' is not used in the Bitcoin paper but was coined after the fact.
+
+Bitcoin's consensus algorithm is called proof of work (PoW) and is based on the challenge to find a specific number referred to as ``nonce.'' \autocite[3]{nakamoto2008}
+Contrary to what was said before, a block hash is not only derived from a block's data and the hash of its preceding block but also from said nonce.
+The nonce has to be ``a value that when hashed [along with the other data], [...] the [resulting] hash begins with a number of zero bits.'' \autocite[3]{nakamoto2008}
+(The attentive reader might have noticed that the hash of the first Bitcoin block does, in fact, begin with a number of zero bits.)
+
+As hashing functions are one-way functions, though, a value satisfying this requirement cannot be computed, ``it has to be guessed.'' \autocite[7]{baerenfaenger2020a}
+To this end, a node increments a nonce ``until a value is found that gives the block's hash the required zero bits.'' \autocite[3]{nakamoto2008}
+The number of required zero bits is referred to as difficulty, since the more zero bits are required, the more ``average work,'' \autocite[3]{nakamoto2008} i.e., processing power, is required to solve the challenge to find the right nonce -- to which, confusingly, the Bitcoin paper also refers to as proof of work. \autocite[3]{nakamoto2008}
+In the live Bitcoin system, i.e., not the model described in the Bitcoin paper, ``[t]he difficulty [...] is adjusted so as to limit the rate at which new blocks can be generated by the network to one every 10 minutes.'' \autocite{bitcoinit2020a}
+
+% The longest chain is the correct one.
+Once a node finds a proof of work for a block it is currently working on, ``it broadcasts the block [as well as, of course, the nonce and the block hash] to all nodes,'' which check ``if all transactions in it are valid and not already spent'' and, if so, ``express their acceptance of the block by working on creating the next block in the chain, using the hash of the accepted block as the previous hash.'' \autocite[3]{nakamoto2008}
+Most importantly, ``[n]odes always consider the longest chain [they are aware of] to be the correct one'' and switch towards extending it right away when learning about its existence. \autocite[3]{nakamoto2008}
+This constitutes a solution to the double-spending problem.
+
+% Incentives
+Nodes are rewarded for expending work to create new blocks.
+Once a block that a node created is included into the blockchain, the node benefits in two ways.
+First, it gets to keep any transaction fees that were attached to the block's transactions \autocite[4]{nakamoto2008}, as participants may voluntarily pay transaction fees as an incentive to get their transactions processed faster, i.e., to motivate nodes to put them into a block rather than other transactions.
+Second, ``the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block.'' \autocite[4]{nakamoto2008}
+
+Consequently, with each new block, a set amount of new bitcoins come into existence, as the block-creating node puts a special transaction into the new block that transfers bitcoin(s) to it without specifying a debtor.
+To ensure scarcity, this amount is reduced by 50\% roughly every four years, with the result being ``that the number of bitcoins in existence will not exceed slightly less than 21 million.'' \autocite{bitcoinit2020b}
+
+The process of expending work to extend the blockchain and being rewarded for it with bitcoins is commonly referred to as ``mining,'' and the nodes that engage in it are called ``miners.''
+Note that this terminology is not mentioned in the Bitcoin paper but emerged later, just like the term blockchain itself.
+Furthermore, note that this incentive model is specific to Bitcoin.
+Other ways to incentivize nodes to collectively maintain a blockchain-based network are conceivable.
+
+As the Bitcoin system is based on a decentralized network, individual nodes or entire clusters of nodes may learn about new blocks/blockchains with delay, e.g., due to long paths or temporary network partition.
+However, as the longest chain will at some point have propagated the network, all nodes will eventually accept and extend it.
+Thus, Bitcoin is said to feature ``eventual consistency.'' \autocite[35]{bashir2020}
+
+Since the inception of Bitcoin and, along with it, blockchain technology, a variety of other blockchain-based systems and, hence, consensus algorithms have been proposed, some of which are featured later in this thesis.
+However, as blockchain technology is commonly discussed in reference to Bitcoin, Bitcoin and PoW can be considered the reference model of blockchain technology and consensus algorithms, respectively.
+
+Unless explicitly noted otherwise, in this thesis, the term ``blockchain system'' refers to Bitcoin-style blockchain systems based on PoW. 
+
+\subsection{Smart contracts}
+
+As outlined in the previously, blockchain technology enables the nodes of a decentralized system to reach consensus.
+In Bitcoin, specifically, nodes reach consensus on a single transaction history, from which each participant's balance of bitcoins, i.e., Bitcoin's cryptocurrency token, can be derived.
+Blockchain technology and its ability to facilitate agreement can, however, be used for a variety of use cases beyond cryptocurrency.
+
+Most notably, blockchain systems enable the decentralized enforcement of smart contracts.
+The American computer scientist and legal scholar Nick Szabo is commonly credited with conceiving the concept of smart contracts as early as 1994, long before blockchain technology came around, defining a smart contract as ``a computerized transaction protocol that executes the terms of a contract.'' \autocite{szabo1994}
+
+% ...embedded in hardware and software
+Szabo later describes smart contracts in the context of the quest towards ``the formalizations of our relationships'' in order to achieve ``ideal security.'' \autocite{szabo1997}
+He notes that ``[m]any kinds of contractual clauses (such as collateral, bonding, delineation of property rights, etc.) can be embedded in the hardware and software.'' \autocite{szabo1997}
+
+% Vending machine example
+As a ``canonical real-life example,'' he cites ``the humble vending machine,'' as ``the machine takes in coins, and via a simple mechanism, [...] dispense[s] change and product according to the displayed price,'' thereby constituting ``a contract with bearer: anybody with coins can participate in an exchange with the vendor.'' \autocite{szabo1997}
+
+Smart contracts, however, ``go beyond the vending machine in proposing to embed contracts in all sorts of property that is valuable and controlled by digital means.'' \autocite{szabo1997}
+He, furthermore, adds that smart contracts ``reference [...] property in a dynamic, often proactively enforced form'' and, thereby, ``provide much better observation and verification.'' \autocite{szabo1997}
+
+After several iterations of ``refinement,'' Szabo presents an exemplary ``smart lien protocol,'' i.e., a smart contract, to formalize a how ``car is being used to secure credit'' -- a matter that, traditionally, ``would create a headache for the creditor,'' as the ``the repo man would no longer be able to confiscate a deadbeat's car'': \autocite{szabo1997}
+
+\begin{quote}
+  \begin{enumerate}
+    \item A [car] lock to selectively let in the owner and ex[c]lude third parties;
+    \item A back door to let in the creditor;
+    \item[3.a.] Creditor back door switched on only upon nonpayment for a certain period of time; and
+    \item[3.b.] The final electronic payment permanently switches off the back door.
+  \end{enumerate}
+\end{quote}
+
+% Blockchain technology enables decentralized enforcement of smart contracts.
+Blockchain technology lets these remarks on smart contracts shine in a new light, as it enables the nodes of a decentralized network to execute such formalized contracts by facilitating agreement between them with regards to said execution.
+While Bitcoin aims at eradicating ``the need for a trusted third party'' in monetary systems by proposing a decentralized ``one-CPU-one-vote'' system that is open-access and ``based on cryptographic proof instead of trust,'' \autocite[1, 3]{nakamoto2008} the same underlying mechanism can be used to collectively enforce smart contracts in a decentralized, transparent and cryptographically verifiable way.
+
+However, for the sake of correctness, it is to be pointed out that in the aforementioned examples given by Szabo, smart contracts ``reference'' \autocite{szabo1997} and affect physical, i.e., ``off-chain,'' objects, which, obviously, cannot be achieved by software alone.
+Physical objects can very well be represented by ``on-chain'' tokens, though, and these can be affected, e.g., transferred, in the context of the blockchain-based execution of smart contracts.
+
+% Token definition
+At this point, it is necessary to refine the previous usage of the term token.
+In a technical sense, it describes ``an entity that is maintained and transferred within a blockchain-based system.'' \autocite[15]{baerenfaenger2020a}
+Thus, bitcoin is the token of the Bitcoin system, as it is maintained and transferred within it.
+In a legal sense, a token can \enquote{be regarded as a [metaphorical] \enquote{container}} that may embody legal rights. \autocites[15]{baerenfaenger2020a}[55, 57]{li2019}
+
+While it remains subject of debate whether a bitcoin has intrinsic value, it is clear that it neither represents a claim on a central bank, unlike, e.g., euro banknotes, nor does it represent any other legal rights, like, e.g., property rights to a gold bar.
+Thus, to continue the analogy of containers, a bitcoin must be considered an empty container or, rather, empty token.
+However, as mentioned, blockchain systems are perfectly able to manage tokens that are not empty containers, i.e., tokens that do, in fact, embody rights, e.g., property rights to physical objects.
+
+The previously hinted at question that arises from this is how synchrony between the digital world and the physical world is enforced.
+If, e.g., a token representing property rights to a gold bar is transferred to a new owner in a blockchain-based system, how does this translate to the physical world?
+To this end, the Liechtenstein Blockchain Act, the first European legislation to regulate the blockchain domain, introduces the role of a physical validator, which is tasked with ensuring the very synchrony ``between the object and the token that represents rights to it.'' \autocite[67]{li2019}
+In the remainder of this thesis, synchrony between ``on-chain'' tokens and the real-world objects they represent is assumed.
+
+Arguably, it was Ethereum, a blockchain system featuring the cryptocurrency ether as its native token, that revisited the idea of smart contracts and popularized them in the blockchain domain.
+Thus, today, smart contracts are commonly discussed in reference to Ethereum's model of smart contracts.
+
+The Ethereum whitepaper was proposed by the Russian-Canadian software engineer Vitalik Buterin in 2013. \autocite{buterin2013a, buterin2013b}
+Its title, ``Ethereum white paper: a next generation smart contract \& decentralized application platform,'' confirms that Ethereum aims to be understood as a decentralized platform for smart contracts.
+The following excerpt of the Ethereum whitepaper is emblematic for Ethereum's view on smart contracts: \autocite[1]{buterin2013a}
+
+\begin{quote}
+  Commonly cited applications [of blockchain technology] include [...] ``smart contracts'' -- systems which automatically move digital assets according to arbitrary pre-specified rules.
+  For example, one might have a treasury contract of the form ``A can withdraw up to X currency units per day, B can withdraw up to Y per day, A and B together can withdraw anything, and A can shut off B's ability to withdraw.''
+\end{quote}
+
+Ethereum is, in many ways, similar to Bitcoin, most notably, Ethereum also leverages PoW to facilitate consensus, although, as part of the Eth2 upgrades \autocite{ethereum2020a}, it switches to an alternative consensus algorithm called proof of stake (PoS) \autocite{ethereum2020b}.
+One of the crucial differences between Bitcoin and Ethereum is that Bitcoin is transaction-based (or based on the unspent transaction output (UTXO) model) while Ethereum is account-based (or based on the account/balance model).
+
+In Bitcoin, there is no notion of accounts, the state of the system consists solely of bitcoins, each of which is represented by the transactions that transfer ownership of that particular bitcoin.
+Thus, in order to calculate a participant's balance of bitcoins, one must -- simplified speaking -- traverse all transactions of all bitcoins and sum up the value of those transactions that transfer (fractions of) bitcoins to the participant in question, while, obviously, only counting those transactions that the participant has not themselves spent yet -- hence, the term unspent transactions.
+Ethereum, by contrast, does feature an intuitive model of accounts as \enquote{the [system's global] state is made up of objects called \enquote{accounts.}} \autocite[13]{buterin2013a}
+
+With regards to smart contracts, it is to be pointed out that Ethereum features two types of accounts:
+``externally-owned accounts,'' as in owned by a participant, and ``contract accounts,'' which are ``controlled [or owned] by their contract code.'' \autocite[13]{buterin2013a}
+An account in Ethereum is made up of ``fields,'' including ``[t]he account's current ether balance,'' ``[t]he account's contract code'' and ``[t]he account's storage,'' where the latter two fields only apply to contract accounts and refer to the source code of an account's smart contract and the ``internal storage'' that is available to it for maintaining mutable state, respectively. \autocite[13-14]{buterin2013a}
+
+In Ethereum, the execution of a smart contract is initiated by a transaction sent to the address of its account and is carried out as ``part of the block validation algorithm.''
+Thus, ``if a transaction is added into block B the code execution spawned by that transaction will be executed by all nodes, now and in the future, that download and validate block B.'' \autocite{buterin2013b}
+
+% Ethereum smart contract programming languages
+Ethereum has proposed multiple programming languages to define smart contracts.
+The code examples from the original Ethereum whitepaper are implemented in the Python-based programming language Serpent (which has since been deprecated \autocite{buterin2017a}).
+Today, the ``default choice'' to define smart contracts in Ethereum is the JavaScript-like programming language Solidity, for ``close-to-the-metal optimizations'' there is the pythonic programming language Vyper, which, however, ``is still experimental.'' \autocite{buterin2017b}
+
+% SplitPot smart contract
+As part of a seminar paper on blockchain tokens \autocite{baerenfaenger2020a} that I wrote in 2020, some contributors from the Ethereum community on StackExchange \autocite{baerenfaenger2020c} and I designed an Ethereum smart contract as an example of an archetypal application of the technology.
+To this end, the smart contract had to be simple, it had to place a task that is traditionally performed by a trusted third party into the hands of the decentralized network that is Ethereum and it, most importantly, it had to be a formalization of a contractual agreement in the sense of Szabo's remarks.
+
+The resulting smart contract, dubbed \texttt{SplitPot}, represents the basic agreement between three participants to evenly split up all funds, i.e., ether, sent to the smart contract's account, which, traditionally, would most likely have involved some kind of trustee:
+\\
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+pragma solidity ^0.6.0;
+
+contract SplitPot {
+  address payable[] beneficiaries = [
+    0x498898b3F52DAba1bB304a4b4D2EA31a111484B1,
+    0xAcb19c763EB67ea757Efd8Cd8b6ecceb28F1284B,
+    0xD5d3f3650C4DdE7B8034671129443A596Ce8ed57
+  ];
+
+  receive() external payable {
+    uint individualAmount = msg.value / beneficiaries.length;
+    
+    for (uint i = 0; i < beneficiaries.length; i++) {
+      beneficiaries[i].transfer(individualAmount);
+    }
+  }
+}
+\end{lstlisting}
+\caption*{A smart contract representing a \texttt{SplitPot}}
+\end{figure}
+
+% \begin{minipage}{\textwidth}
+% \begin{lstlisting}[caption={A smart contract % representing a \texttt{SplitPot}}]
+% pragma solidity ^0.6.0;
+% 
+% contract SplitPot {
+%   address payable[] beneficiaries = [
+%     0x498898b3F52DAba1bB304a4b4D2EA31a111484B1,
+%     0xAcb19c763EB67ea757Efd8Cd8b6ecceb28F1284B,
+%     0xD5d3f3650C4DdE7B8034671129443A596Ce8ed57
+%   ];
+% 
+%   receive() external payable {
+%     uint individualAmount = msg.value / % beneficiaries.length;
+%     
+%     for (uint i = 0; i < beneficiaries.length; i++) % {
+%       beneficiaries[i].transfer(individualAmount);
+%     }
+%   }
+% }
+% \end{lstlisting}
+% \caption*{Two alternative chains, one being the % longer, ``correct'' one}
+% \end{minipage}
+
+In line 1, the version \texttt{pragma} is set to prevent compilation with compiler versions that might be incompatible with the stated version of the Solidity programming language.
+In lines 4--8, the addresses of the (external) accounts of the three participants are stored in an array (\texttt{beneficiaries}).
+In lines 10--16, the \texttt{receive()} function is defined, which is executed whenever a transaction is sent to the contract account.
+It calculates each beneficiary's due (\texttt{individualAmount}) by dividing the amount of received ether (\texttt{msg.value}) by the number of beneficiaries (\texttt{beneficiaries.length}), i.e., three.
+Lastly, a \texttt{for} loop iterates through each of the three participants and transfers them their respective share (\texttt{beneficiaries[i].\\transfer(individualAmount)}).
+Note that this implementation has some serious drawbacks which are accepted for the sake of brevity.
+
+As mentioned earlier, one of the most popular applications of smart contracts is to leverage those to implement alternative tokens on top of Ethereum or similar blockchain systems.
+In the Ethereum whitepaper, the following minimalist example of a ``token system in Serpant'' is given: \autocite[20]{buterin2013a}
+\\
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+def send(to, value):
+  if self.storage[msg.sender] >= value:
+    self.storage[msg.sender] =
+      self.storage[msg.sender] - value
+    self.storage[to] = self.storage[to] + value
+\end{lstlisting}
+\caption*{A smart contract representing a token system}
+\end{figure}
+
+% \begin{minipage}{\linewidth}
+% \begin{lstlisting}[caption={A token system smart contract}]
+% def send(to, value):
+%     if self.storage[msg.sender] >= value:
+%         self.storage[msg.sender] = self.storage[msg.sender] - value
+%         self.storage[to] = self.storage[to] + value
+% \end{lstlisting}
+% \end{minipage}
+
+The basic idea is that the storage assigned to the contract account (\texttt{self.storage}) is used to keep track of each participant's balance of the new token.
+In line 1, the \texttt{send()} function is defined, which is called in order to transfer a given amount of the token (\texttt{value}) to another participant (\texttt{to}).
+In line 2, the storage assigned to the debtor (\texttt{self.storage[msg.sender]}) is accessed to verify that their funds are sufficient to cover the transfer of the amount in question (\texttt{>= value}).
+If this is the case, in lines 3--4, the debtors's balance is reduced by said amount (\texttt{self.storage[msg.sender] - value}) while the creditor's is increased by it (\texttt{self.storage[to] + value}).
+
+\subsection{Permissioned systems}
+
+Blockchain systems such as Bitcoin and Ethereum are, today, classified as permissionless blockchain systems.
+This is due to the fact that they enable consensus in open-access networks where nodes may join and leave freely at all times, as there is no gatekeeper.
+
+In contrast to this, industry has introduced what are commonly referred to as permissioned blockchains.
+Typically, these are based on closed, i.e, gated, networks that consist of nodes that belong to a company or a conglomerate of companies and maintain information that is not publicly accessible.
+Blockchain systems with the latter property are also referred to as private blockchain systems.
+
+IBM defines permissioned blockchain systems as to ``[e]stablish decentralized trust in a network of known participants rather than a public network with no identity.'' \autocite{ibm2020}
+This definition is, obviously, contradictory:
+A ``network of known participants'' is, by definition, centralized, as there has to be some form of gatekeeping mechanism in place that is controlled by a central party responsible for network admission.
+Claiming to establish ``decentralized trust'' in a centralized network makes no sense.
+
+As mentioned before, it is the main contribution of blockchain technology to facilitate agreement between the nodes of a decentralized -- in other words, unpermissioned -- network.
+Thus, one might wonder what the contribution of permissioned blockchains is at all, since ``[t]raditional Byzantine agreement solves the consensus problem in a closed system of \(N\) nodes'' \autocite[1]{mazieres2019simplescp} -- since 1980 \autocite{lamport1980}.
+A similar line of reasoning is presented by former JP Morgan researcher Stuart Popejoy with regards to Hyperledger Fabric, a popular, IBM-backed permissioned blockchain system: \autocite{popejoy2019}
+
+\begin{quote}
+  IBM's definition of blockchain captures the distributed and immutable elements of blockchain but conveniently leaves out decentralized consensus -- that's because IBM Hyperledger Fabric doesn't require a true consensus mechanism at all.
+  Instead, it suggests using an ``ordering service'' called Kafka, but without enforced, democratized, cryptographically-secure voting between participants, you can’t really prove whether an agent tampers with the ledger. In effect, IBM’s ``blockchain'' is nothing more than a glorified time-stamped list of entries.
+\end{quote}
+
+All this is not to deny that permissioned blockchain systems do add value.
+Without question, they do, e.g., by transferring new paradigms that have emerged in the context of (public) blockchain technology into the already established domain of private networking, most notably, the aforementioned immutability, which results from the chaining of hashes of subsequent data sets.
+However, from a computer science point of view, permissioned blockchain systems do not bring anything new to the table.
+
+Thus, as stated before, in the remainder of this thesis, blockchain technology is to be interpreted in its original and, arguably, true sense, i.e., in the sense of public blockchains systems based on decentralized networks.
+Analyzing the concept of finality in the context of permissioned blockchain systems would result in a different and much shorter discussion, as these have essentially the same properties as the centralized solutions that traditionally underpin payment systems.

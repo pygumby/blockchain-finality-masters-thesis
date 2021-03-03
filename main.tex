@@ -1,0 +1,130 @@
+\documentclass[11pt]{report} % Font size overridden later
+\usepackage[utf8]{inputenc}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Margins
+% ---------- ---------- ---------- ---------- ---------- %
+
+% \usepackage{showframe}
+\usepackage[
+  a4paper,
+  top      = 20mm,
+  bottom   = 20mm,
+  right    = 40mm,
+  left     = 30mm,
+  footskip = 10mm
+]{geometry}
+\sloppy
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Typography
+% ---------- ---------- ---------- ---------- ---------- %
+
+% \usepackage{newtxtext}
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+\usepackage[sfdefault]{plex-sans}
+\usepackage{plex-serif}
+% \usepackage{plex-mono}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Paragraphs
+% ---------- ---------- ---------- ---------- ---------- %
+
+\parindent=0pt
+\usepackage[parfill]{parskip}
+\usepackage[all]{nowidow}
+\linespread{1.25}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Lists, listings, figures and tables
+% ---------- ---------- ---------- ---------- ---------- %
+
+\usepackage{listings}
+\lstset{
+  basicstyle  = \ttfamily\footnotesize,
+  numberstyle = \ttfamily\footnotesize,
+  breaklines  = true,
+  numbers     = left,
+  xleftmargin = 2em,
+  frame       = lrtb
+}
+\usepackage{float}
+\usepackage{svg}
+\usepackage{caption}
+\usepackage{booktabs}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Footnotes
+% ---------- ---------- ---------- ---------- ---------- %
+
+\usepackage[hang, bottom, flushmargin]{footmisc}
+\setlength{\footnotemargin}{3.5mm}
+\interfootnotelinepenalty=10000
+\setlength{\skip\footins}{7mm}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% References
+% ---------- ---------- ---------- ---------- ---------- %
+
+\usepackage[
+  backend = biber,
+  style = verbose-ibid
+]{biblatex}
+\bibliography{references}
+\setlength\bibitemsep{\parskip}
+\usepackage{xurl}
+
+% ---------- ---------- ---------- ---------- ---------- %
+% Misc
+% ---------- ---------- ---------- ---------- ---------- %
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{csquotes}
+\hyphenation{Settlement-risiken}
+
+\begin{document}
+
+  \input{titlepage}
+  
+  \pagenumbering{roman}
+  %\pagenumbering{gobble}
+
+  \chapter*{Abstract}
+  \input{chapters/abstract}
+  
+  \renewcommand\contentsname{Table of contents}
+  \tableofcontents
+  
+  \cleardoublepage
+  \pagenumbering{arabic}
+  
+  \chapter{Introduction}
+  \input{chapters/chapter-01-introduction}
+  
+  \chapter{Prerequisites}
+  \input{chapters/chapter-02-prerequisites}
+  
+  \chapter{How is finality defined in the literature?}
+  \input{chapters/chapter-03-finality-definition}
+  
+  \chapter{Can blockchain systems provide legal finality?}
+  \input{chapters/chapter-04-legal-finality-of-blockchain}
+  
+  \chapter{Can blockchain systems provide technical finality?}
+  \input{chapters/chapter-05-technical-finality-of-blockchain}
+  
+  \chapter{Conclusion}
+  \input{chapters/chapter-06-conclusion}
+  
+  \printbibliography[
+    heading = bibintoc,
+    title   = {References}
+  ]
+  
+  \pagenumbering{gobble}
+  
+  \chapter*{Eidesstattliche Erklärung}
+  \input{chapters/disclaimer}
+
+\end{document}

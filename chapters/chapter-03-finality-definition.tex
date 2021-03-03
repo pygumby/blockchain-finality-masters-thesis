@@ -1,0 +1,263 @@
+This chapter examines how the concept of settlement finality is defined in the literature.
+Since the most prominent incident regarding finality occurred within the domain of foreign exchange, finality will first be considered in this context.
+Finality is then examined in the more general context of wholesale payment systems.
+Finally, a definition of finality is derived from the preceding accounts in the literature.
+
+\section{Foreign exchange systems}
+
+In the following, a first account of finality is derived from analyzing an incident that occurred in the realm of foreign exchange as well as its aftermath, since this depicts well what finality is and why it is important in the first place.
+
+\subsection{Herstatt incident}
+
+The concept of settlement finality is commonly discussed in the context of settlement risks arising from the absence thereof.
+Such risks may have first come to the attention of a wider public in 1974, with the collapse of Herstatt bank, as the German bank's failure caused severe disruptions in international payments.
+The publication ``Settlement risk in foreign exchange markets and CLS Bank,'' \autocite[55-56]{galati2002} which the Bank of International Settlements (BIS) published in 2002, describes the incident as summarized in the following paragraph:
+
+``On 26 June 1974, at 15:30 CET,'' German regulators forced Herstatt bank, which was ``very active in foreign exchange markets,'' into liquidation, when some of its counterparties had already paid ``large amounts of Deutsche [M]arks'' to it as the respective Deutsche Mark legs of foreign exchange transactions.
+As ``all US dollar payments from the German bank's account'' were ``suspended'' due to the insolvency proceedings, the corresponding US dollar legs of those transactions were never completed, though.
+As the Deutsche Marks had been paid ``irrevocably,'' Herstatt's counterparties ``became fully exposed to the value of those transactions.''
+To make matters worse, ``[o]ther banks [...] refused to make payments [...] until they received confirmation that their countervalue had been received,'' which caused a chain reaction, as ``[t]hese disruptions were propagated further through the multilateral net settlement system [that was] used.''
+The incident was the ``first and most dramatic case [...] where incomplete settlement of foreign exchange transactions caused severe problems in payment and settlement systems.''
+
+Following the incident, ``[t]he risk that one party in a foreign exchange trade pays out the currency it sold but does not receive the currency it bought,'' i.e., FX settlement risk, became known as Herstatt risk. \autocite[57]{galati2002}
+
+Herstatt risk arises when ``separate legs of a foreign exchange transaction are settled independently and in many cases at significantly different times.'' \autocite[56]{galati2002}
+Two decades after the Herstatt incident, in 1995, a lag of up to two business days between ``the time when a party to a foreign exchange transaction can no longer cancel unilaterally a payment instruction for the currency it sells and the time when the currency purchased has been received'' was still found to be common. \autocite[56]{galati2002}
+This can be attributed to payment systems not operating to a timetable that permits ``simultaneous or near simultaneous settlement'' and whose operating hours' overlap between time zones is ``limited.'' \autocite[56]{galati2002}
+
+From these remarks, a preliminary notion of finality can be derived.
+The Deutsche Mark legs of the FX trades from the Herstatt incident were described as ``irrevocably'' settled when they could no longer be rescinded or reversed.
+In that sense, they can be considered settled with finality.
+The FX transactions as a whole, however, were everything but settled with finality, which is why the completion of their respective other legs, i.e., the US dollar legs, could be prevented by German authorities, which, in turn, gave rise to the disruptive aftermath of Herstatt's failure.
+
+\subsection{Payment-vs-payment principle}
+
+To reduce Herstatt risk, several initiatives were undertaken.
+One the one hand, through the adoption of RTGS systems, ``[i]ntraday final settlement was introduced more widely'' in order to ``shorten the duration of settlement exposures.'' \autocite[59]{galati2002}
+On the other hand, ``bilateral and multilateral arrangements for [...] netting'' were introduced in order to reduce the ``number and size of payments requiring settlement.'' \autocite[59]{galati2002}
+However, although these initiatives ``reduced either the size or the duration of settlement exposures,'' ``simultaneous finality of received payments'' was not achieved and, hence, settlement risks in FX transactions were decreased but not eliminated. \autocite[59]{galati2002}
+
+Thus, ``[i]n the mid-1990s,'' ``to tackle the problem of settlement risk,'' the G20 banks, ``a group of major foreign exchange market participants,'' developed a solution based on the payment-versus-payment (PvP) principle, which aims to ensure the simultaneous settlement of ``the two legs of a transaction'' by stipulating that ``one cannot occur without the other.'' \autocite[60]{galati2002}
+PvP is also described as a ``settlement standard'' where ``funds of two counterparties are transferred simultaneously and one transfer is only considered final if the counter-transfer is final as well.'' \autocite[6]{schaller2007}
+PvP thereby eliminates ``the most important settlement risk, where one counterparty transfers the owed funds without receiving the counter-payment,'' i.e., Herstatt risk. \autocite[6]{schaller2007}
+
+CLS Bank International, an acroym for ``continuous linked settlement,'' was set up to develop the G20 bank's PvP-based solution in 1997 and went into operation in 2002, ``settling transactions involving seven currencies,'' including the euro and the US dollar. \autocite[60-61]{galati2002}
+The BIS publication on settlement risks in FX describes the settlement phases of CLS as summarized in the following steps: \autocite[61-62]{galati2002}
+
+\begin{enumerate}
+  \item Submission of transactions: ``[M]embers submit [...] transactions to be settled by [...] 00:00 CET.''
+  \item Calculation of settlement positions: ``CLS Bank [...] calculates each [...] member's net total pay-in/pay-out position for each currency and at 06:30 CET issues a pay-in schedule.''
+  \item Funding of settlement accounts: ``Payments to CLS Bank are executed between 07:00 and 12:00 CET.''
+  \item Settlement of transactions: ``CLS Bank settles each trade over these accounts by simultaneously crediting the buyer’s account in the currency that is bought and debiting the seller’s account in the currency that is sold.''
+\end{enumerate}
+
+From these steps, it can already be inferred that there is a ``clear distinction'' between the funding of settlement accounts and the settlement of transactions, as the former are funded on a net basis while the latter are settled on a gross basis. \autocite[62]{galati2002}
+
+It can be summarized that ``CLS eliminates credit risk in all but very extreme circumstances'' by leveraging the ``payment-versus-payment principle and the positive account balance rule.'' \autocite[62]{galati2002}
+With regards to liquidity risk, the issue is, however, ``more complex,'' since ``CLS Bank is not automatically able to pay out to other members in the currencies due.'' \autocite[63]{galati2002}
+
+\section{Wholesale payment systems}
+
+In the following, the previously given preliminary account of finality is generalized with regards to wholesale payment systems.
+In the course of this, both DNS and RTGS are examined in this context.
+Furthermore, the EU's Settlement Finality Directive, which is taken as an example of legislation intended to enable finality in such systems, is analyzed to identify the notion of finality assumed therein.
+
+\subsection{Deferred net settlement}
+
+While the failure of Herstatt bank and its aftermath serve as an illustrative example of settlement risks arising from the inability to achieve finality, it is obvious that not only foreign exchange trades are exposed to such risks.
+In fact, settlement risks associated with finality or, rather, the lack thereof, are typically discussed in the broader context of payments systems in general, i.e., in the context of DNS systems employing net settlement and RTGS systems employing gross settlement.
+
+One of the previously mentioned initiatives that were undertaken to limit settlement risks was the application of netting, as it reduces the ``size and number of payments requiring settlement.'' \autocite[59]{galati2002}
+This advantage follows directly from the way netting works:
+If transactions are not settled individually but offset against each other until, at some point, each participant's net settlement position is transferred, there are, in total, fewer transactions to be settled (``number'') and the respective net settlement positions are smaller than the sum of the individual transfer order values (``size'').
+Netting, therefore, reduces the ``number of settlement cycles,'' the ``value of the [t]ransfer [o]rders'' -- which, in turn, reduces ``the size of the credit [and] liquidity risk exposures incurred by [...] participants'' -- as well as the overall ``cost,'' as ``less back-office capacity'' and ``[c]ollateral'' are needed. \autocite[40]{vereecken2003}
+
+It cannot be overstated, however, that the advantages of netting regarding settlement risks are predicated on the respective netting arrangement to have a strong legal footing, which is discussed in detail in the following paragraphs.
+If, however, said legal footing is lacking, netting does not only not have the aforementioned advantages but, in addition, in and of itself introduces the risk of not achieving final settlement.
+In other words, a DNS system without a strong legal basis does not reduce but exacerbates settlement risks and, consequently, systemic risk.
+
+Such risks are present if the legal basis of a payment system employing netting is such that already submitted transfer orders and, therefore, the netting as a whole are not protected from legal challenge.
+The central question, therefore, is whether ``transactions [are] hon[o]red as final'' or if they, instead, ``could [...] be considered void or voidable by liquidators and relevant authorities.'' \autocite[16]{cpmi2016}
+
+Analogously to the Herstatt incident, this is commonly discussed in the context of a participant becoming insolvent.
+A competent liquidating authority might, ``in some jurisdictions,'' legally challenge a netting ``by performing only those forward contracts that are profitable to the [insolvency] estate while repudiating those [...] that are unprofitable'' -- a practice referred to as cherry picking. \autocite[8]{cpmi1990}
+In other words, outgoing payments of the insolvent participant would be blocked and would effectively become unsecured claims against the assets of the insolvency estate, resulting in the failing participant's inability to pay their net settlement position at settlement time.
+
+Obviously, cherry-picked transfer orders must be removed from the ``netting calculation,'' i.e., ``the entire netting process must be reversed,'' which is referred to as unwinding. \autocite[41]{vereecken2003}
+As the repudiated transfer orders, i.e., those that are ``unprofitable to the [insolvency] estate,'' are ``precisely those that are profitable to the [...] counterparty,'' that counterparty, be it an individual participant or a CCP, becomes exposed to the gross value of that transfer order. \autocite[8]{cpmi1990}
+
+Since unwinding can drastically change the net settlement position of other participants, the aforementioned reduction of settlement risks attributed to netting does not apply in jurisdictions where cherry picking is legal.
+In this case, i.e., if a netting arrangement does not have a strong legal footing, netting ``merely obscures the levels of exposure [to credit risk and liquidity risk]'' \autocite[40]{vereecken2003} and thereby exacerbates these settlement risks.
+
+Moreover, ``unexpected and sizeable change[s]'' of other participants' obligations might, in fact, ``result [...] in their inability to settle.'' \autocite[41]{vereecken2003}
+This can lead to a ripple effect, setting off a chain of defaults that could even go beyond the scope of the payment system.
+Thus, if not based on a said legal footing, a netting arrangement introduces systemic risk, too.
+
+\subsection{Real-time gross settlement}
+
+It must be pointed out that, in principle, the aforementioned settlement risks also apply to systems that settle on a gross basis -- not only to those that settle on a net basis.
+If transfer orders are not protected from legal challenge, a transfer order submitted to an RTGS system is equally at risk to be cherry-picked as if it had been submitted to a DNS system.
+
+There is, however, a crucial difference between the two types of systems, i.e., the period of time between a transfer order's acceptance by a system for settlement and final settlement.
+In DNS systems, which typically settle at the end of the day, that period of time is much longer than in RTGS systems, which may not always provide immediate settlement but do typically settle at multiple intervals during the day, thereby at least approximating real-time settlement.
+If said period of time is long enough, it is feasible for a participant to submit transfer orders, go insolvent and, as a consequence of this, have those transfer orders cherry-picked -- all before final settlement.
+The Herstatt incident is an example of this.
+Such scenario is, however, much less likely if there are only, say, minutes between transfer order submission and final settlement.
+
+The main advantage of RTGS over DNS is, therefore, that the former ``substantially reduces the duration of credit [and] liquidity [...] risk exposures,'' which, in turn ``reduces systemic risk.''
+\autocite[43]{vereecken2003}
+This is why the adoption of RTGS systems was one of the previously mentioned initiatives  that were undertaken to limit settlement risks.
+Furthermore, as there is no netting when settling on a gross basis, there, consequently, is no netting calculation to be unwound in case of cherry picking.
+Thus, ``RTGS precludes the possibility of unwinding payments.'' \autocite[43]{vereecken2003}
+Finally, with gross settlement, ``[s]ettlement pressures are not concentrated at particular points in time.'' \autocite[43]{vereecken2003}
+
+The reason why DNS is oftentimes preferred over RTGS comes down to cost -- and has only little to do with settlement risks.
+The higher cost of RTGS not only follows from the fact that transfer orders are processed individually but are also the result of a higher demand in liquidity, ``because participants need sufficient liquidity to cover [each of] their outgoing payments'' \autocite[26]{cpmi2001} individually, as they are not offset against incoming payments.
+In DNS, to the contrary, ``intraday liquidity is provided by participants in the system'' but comes at the cost of ``credit and liquidity risks.'' \autocite[26]{cpmi2001}
+
+It can be subsumed that DNS decreases settlement risks arising from the inability to achieve finality by reducing the size and number of transactions to be settled---if, and only if, transfer orders and netting calculations cannot be legally challenged.
+RTGS, on the other hand, decreases such risks by reducing the duration of exposure to them.
+The main advantage of DNS is that it is cheaper, as it leverages batch processing and requires less liquidity.
+The main advantage of RTGS is that---while ``[i]n normal times, both DNS and RTGS networks can provide the same assurance of payment finality''---in times of ``crises,'' RTGS ``provides greater assurance of payment finality and uninterrupted financial market operation in the event of multiple [...] participant failures.'' \autocite[5]{pages2005}
+
+\subsection{Settlement Finality Directive}
+
+The previously described settlement risks associated with the inability to achieve finality are, for the most part, consequences of the insufficient legal soundness of a payment system.
+Thus, the Settlement Finality Directive (SFD), formally, Directive 98/26/EC of the European Parliament and of the Council of 19 May 1998 on settlement finality in payment and securities settlement systems, was conceived ``to reduce systemic risk [resulting from the settlement risks arising from inability to achieve finality] by removing various areas of uncertainty in payment and securities settlement systems.'' \autocite[19]{cpmi2001}
+
+The parts of the SFD that are relevant in the context of this thesis are those that provide insight into what concept of finality is assumed and how said notion of finality is enabled by the SFD.
+To this end, the SFD's Articles 3, 4, 5, 7, 8 and 9(1) are discussed in more detail in the following paragraphs.
+
+Article 3 provides the protection of netting from insolvency law, i.e., if a participant goes insolvent during the day, liquidating authorities cannot unwind the netting calculation to be settled at the end of that day. \autocite[19]{cpmi2001}
+The relevant excerpt from Article 3 reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  \begin{enumerate}
+    \item Transfer orders and netting shall be legally enforceable and binding [...] even in the event of insolvency proceedings against a participant, provided that transfer orders were entered into the system before the moment of opening of such insolvency proceedings [...]. [...]
+    \item No law [...] on the setting aside of [...] transactions concluded before the moment of opening of insolvency proceedings [...] shall lead to the unwinding of a netting.
+    \item The moment of entry of a transfer order into a system shall be defined by the rules of that system. [...]
+  \end{enumerate}
+\end{quote}
+
+Article 3(1) stipulates that, ``in principle,'' \autocite[46]{vereecken2003} transfer orders entered into a system by an insolvent participant are enforceable if entered before the opening of the participant's insolvency proceedings.
+``In practice,'' however, transfer orders ``entered after the opening'' of such proceedings are protected as well, \enquote{insofar as they are \enquote{carried out on the day of the insolvency proceedings.}}
+\autocite[47]{vereecken2003}
+Such payments ``must [after settlement] be restituted by the beneficiary to the liquidator,'' though, as they ``would otherwise fraudulently advantage the beneficiary to the detriment of the other unsecured creditors.'' \autocite[49]{vereecken2003}
+
+This touches upon an important principle: the distinction between settlement finality and ``obligation finality.'' \autocite[48]{vereecken2003}
+The SFD ``aims at ensuring settlement finality,'' i.e., ensuring that ``[t]ransfer [o]rders entered in a system are protected, so that the system can settle,'' while it does not aim at protecting the ``legal validity and enforceability of the underlying transaction [or obligation].'' \autocite[48]{vereecken2003}
+Accordingly, the SFD protects the settlement of transfer orders entered after the opening of insolvency proceedings if settlement is carried out on that day, while it does not, however, shield the underlying transaction from having to be restituted afterwards.
+
+It can be concluded that Article 3(1) stipulates that ``Member States must recogni[z]e the concept of netting,'' and therefore guarantees the ``sound legal basis'' that netting requires to ``avert cherry picking.'' \autocite[45]{vereecken2003}
+Thus, Article 3(1) can be said to exclusively concern netting -- ``the finality of RTGS [t]ransfer [o]rders is guaranteed by other provisions of the Directive.'' \autocite[45]{vereecken2003}
+
+Article 3(2) can be summarized to ``confirm'' the sentiment that the legislator's ``overriding concern'' is to avert ``the unwinding of netting.'' \autocite[48]{vereecken2003}
+
+Article 3(3) reflects the ``specificities and complexity of [...] systems,'' and, consequently, leaves the definition of when exactly a transfer order is considered to have entered the system up to the participants. \autocite[50]{vereecken2003}
+
+Article 4 provides the protection of settlement accounts from insolvency law, i.e., if a participant goes insolvent, liquidating authorities cannot prevent funds from that participant's settlement account from being used to settle.
+The relevant excerpt from Article 4 reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  Member States may provide that the opening of insolvency proceedings against a participant [...] shall not prevent funds or securities available on the settlement account of that participant from being used to fulfil that participant's obligations in the system [...] on the business day of the opening of the insolvency proceedings. [...]
+\end{quote}
+
+As it is ``typically'' the ``effect of an insolvency declaration'' that the insolvent participant has their assets frozen, ``settlement of the insolvent [...] participant's obligations would become impossible,'' even if their settlement account were funded. \autocite[51]{vereecken2003}
+To enable settlement, ``Article 4 cancels this effect with regard to settlement accounts in a system.'' \autocite[51]{vereecken2003}
+
+Article 5 provides the protection of transfer orders from insolvency law, i.e., from the moment a transfer order is processed in the system, it is ensured that it be completed, ``even if the inputting institution fails in the meantime.'' \autocite[19]{cpmi2001}
+The relevant excerpt from Article 5 reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  A transfer order may not be revoked by a participant in a system, nor by a third party, from the moment defined by the rules of that system. [...]
+\end{quote}
+
+Revocation can be defined as the ``voluntary act of rescinding a [t]ransfer [o]rder entered in a system,'' which can be effected by either the ``sending [i]nstitution or a third party,'' e.g., the ``instructing customer.'' \autocite[51]{vereecken2003}
+
+From ``the law of some Member States,'' another account of finality can be derived, which states that ``a payment is not final until it reaches the beneficiary's account.'' \autocite[52]{vereecken2003}
+If such rules apply, the transfer orders instructing the ``transfer [of] money or securities'' are effectively opened up for revocation until ``the money or securities are booked on the beneficiary's account.'' \autocite[52]{vereecken2003}
+This would, in turn, give rise to ``systemic risk,'' e.g., because ``system rules barring revocation would not be enforceable'' since ``mandatory rules from law'' trump contractual agreements. \autocite[52]{vereecken2003}
+
+Thus, Article 5 stipulates that ``neither an [i]nstitution nor a third party can revoke a [t]ransfer [o]rder after a certain point in time [which is defined by the participants of a system].'' \autocite[52]{vereecken2003}
+
+Article 7 provides the prohibition of ``retroactive effects of insolvency rules on rights and obligations in systems,'' i.e., such rights and obligations are shielded from ``backdating [...] effects of an insolvency,'' e.g., zero-hour rules. \autocite[19]{cpmi2001}
+Article 7 reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  Insolvency proceedings shall not have retroactive effects on the rights and obligations of a participant arising from, or in connection with, its participation in a system earlier than the moment of opening of such proceedings.
+\end{quote}
+
+Retroactive effects of an insolvency most prominently arise from zero-hour rules or suspect period rules.
+Zero-hour rules render ``all transactions by a bankrupt participant void from the start (`zero hour') of the day of the bankruptcy,'' which, in DNS systems, ``could cause the netting of all transactions to be unwound,'' or, in RTGS systems, ``could [...] reverse payments that have apparently already been settled and were thought to be final.'' \autocite[19]{cpmi2001}
+Suspect period rules extend this concept -- and its effects -- by encompassing transactions that were entered even earlier, before the start of the day of the insolvency proceedings, i.e., during some ``suspect period.'' \autocite[57]{vereecken2003}
+
+Therefore, Article 7 ``aims to disapply the rules that provide for automatic annulment [...] of certain transactions entered into [a system] shortly before the insolvency proceedings.'' \autocite[57]{vereecken2003}
+However, as the SFD is concerned with settlement finality and not obligation finality, Article 7 does not aim to disapply rules that ``can lead to [such] a transaction being undone'' after the underlying transfer order ``is [...] long settled by this time.'' \autocite[57]{vereecken2003}
+
+Article 8 provides the resolution of conflicts ``between the system rules and the home country insolvency law of a foreign participant,'' as the ``law governing a system'' is stipulated to be the binding law in case of insolvency of that participant. \autocite[19]{cpmi2001}
+Article 8 reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  In the event of insolvency proceedings being opened against a participant in a system, the rights and obligations arising from, or in connection with, the participation of that participant shall be determined by the law governing that system.
+\end{quote}
+
+For each participant ``from another Member State,'' it is obligatory to ``determine [...] whether the system rules [...] will, in the event of that participant's insolvency, be enforceable'' under or be in conflict with that Member State's insolvency law. \autocite[58]{vereecken2003}
+As such beforehand analysis of the ``potential impact of foreign insolvency legislation'' is at least ``complex,'' if not impossible, \autocite[58]{vereecken2003} Article 8 stipulates the law applicable in the event of insolvency proceedings is the law that governs the system -- not the law of the insolvent participant's Member State.
+
+Article 9(1) provides the insulation of collateral from insolvency law, so ``it can be used to clear the debts to a system of a failed participant.'' \autocite[19]{cpmi2001}
+The relevant excerpt from Article 9(1) reads as follows: \autocite{eu1998}
+
+\begin{quote}
+  The rights of a system operator or of a participant to collateral security provided to them in connection with a system [...] shall not be affected by insolvency proceedings [...].
+  Such collateral security may be reali[z]ed for the satisfaction of those rights.
+\end{quote}
+
+In the event of a participant's default ``it must be possible to quickly reali[z]e the [c]ollateral provided to the system'' in order for the system to settle. \autocite[60]{vereecken2003}
+However, insolvency law of most Member States would prevent collateral securities from being realized within a system, just like it would prevent outgoing payments in order to not disadvantage other creditors and their unsecured claims.
+Furthermore, even if this were not the case, the realization of such collateral would ``typically [require to] obtain a court order,'' which, since ``the underlying assets [could] not be reali[z]ed immediately upon occurence of the default,'' would prevent the system from (timely) settlement. \autocite[60-61]{vereecken2003}
+Therefore, Article 9(1) stipulates that ``the [c]ollateral provider's insolvency should not have any effect on the [c]ollateral provided to a system.'' \autocite[61]{vereecken2003}
+
+It can be summarized that the SFD contributes to the ability of payment settlement systems to achieve finality by shielding the components of such systems, e.g., netting calculations, transfer orders and settlement accounts, from the potentially disruptive impact of the Member States' insolvency laws and similar legislation.
+It, furthermore, does so by harmonizing relevant legislation across the Member States and clearly stipulating whose laws apply when, so cross-border systems are legally sound as well.
+
+\section{Literature-derived finality definition}
+
+At this point, a more comprehensive account of finality can be derived.
+As mentioned before, finality is relevant in payment systems, as it is directly related to the settlement risks that participants incur.
+The previously given preliminary notion of finality characterizes final settlement as irrevocable in the sense that a transaction can no longer be rescinded or reversed.
+Conversely, the absence of final settlement can be characterized in the sense that such revocation is still possible, e.g., as an effect insolvency law.
+Such notion of finality as an indicator of irrevocable settlement is in line with the first part of the finality definition by the BIS's  Committee on Payments and Markets Infrastructures (CPMI), which considers final settlement ``[t]he irrevocable and unconditional transfer of an asset or financial instrument.'' \autocite[8]{cpmi2016}
+
+The second part of the CPMI's definition provides an alternative account of final settlement by equating it to ``the discharge of an obligation by the FMI or its participants in accordance with the terms of the underlying contract,'' where ``FMI'' stands for ``financial market infrastructure,'' which, in turn, is defined as ``[a] multilateral system [...] used for the purposes of clearing, settling or recording payments, securities [...] or other financial transactions.'' \autocite[8]{cpmi2016}
+Note that said ``obligation'' does not refer to a liability arising from a contract outside the system's scope but to an obligation arising within the system, e.g., from submitting a transfer order.
+Thus, settlement finality is not equated to what was previously defined as obligation finality.
+The notion of finality as the discharge of an obligation within a payment system is in line with the previous remarks on finality, which overarchingly discussed protecting a transfer order from legal challenge until it is settled -- in other words, until the obligation to or by the system is discharged.
+
+The CPMI's definition ends with the crucial remark that final settlement ``is a legally defined moment.'' \autocite[8]{cpmi2016}
+Both the observation that finality is a legal construct and that it refers to a moment in time are in line with the previous remarks on finality, which exclusively examined legal means through which a payment can be disrupted -- and up to which point in time -- as well as legal means through which said disruption can be prevented.
+
+There is another definition of finality that is in accordance with the aforementioned insights but puts emphasis on the financial stability aspect of the issue. It was proposed in a European Central Bank (ECB) Working Paper from 2005: \autocite[6]{pages2005}
+
+\begin{quote}
+  Finality of settlement ensures that transactions made over payment networks will, at some point, be complete and not subject to reversal even if the parties to the transaction go bankrupt or fail.
+  It is the assurance that even in times of financial system uncertainty, turmoil, or crisis the transaction being undertaken will go through.
+\end{quote}
+
+For the sake of completeness, it is necessary to consider the widely cited definition of finality provided by Canadian law professor and expert in payment and settlement systems Benjamin Geva \autocite[633-634]{geva2008}, which identifies three different accounts of finality:
+
+\begin{quote}
+  In connection with a non-cash payment through the banking system, ``finality of payment'' has acquired diverse meanings.
+  In one sense, it has come to denote the irreversibly of the payment process, particularly in connection with insolvency.
+  Otherwise, it has also been taken to signify the loss of the right to recover a mistaken payment. Finally, it has been used to mark the accountability to the payee/beneficiary by a bank instructed to pay to that payee/beneficiary. 
+\end{quote}
+
+Obviously, the previous remarks assume the first-listed meaning of finality -- and so does the remainder of this thesis.
+The second-listed meaning goes beyond the scope of a transaction within a payment system, as it refers to the possibility of recovering a payment that is settled with finality.
+This account of finality is, therefore, rather to be interpreted in the sense of what has previously been called obligation finality.
+The third-listed meaning is very specific to the traditional banking system and its architecture, and, therefore, is less relevant in the context of blockchain technology.
+
+It can be summarized that the preceding survey of the literature has unilaterally shown that settlement finality is regarded a legal construct -- and the inability to achieve it a legal problem.
+Therefore, this traditional notion of finality is referred to as ``legal finality'' in the remainder of this thesis.
+
+Lastly, it must be pointed out that legal finality is not independent of technology, as technical -- not legal -- factors may increase and decrease settlement risks.
+Long settlement cycles in DNS are an example of the former, short settlement cycles in RTGS of the latter.
