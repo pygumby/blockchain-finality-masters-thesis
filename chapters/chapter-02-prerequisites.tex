@@ -300,7 +300,6 @@ To this end, the smart contract had to be simple, it had to place a task that is
 The resulting smart contract, dubbed \texttt{SplitPot}, represents the basic agreement between three participants to evenly split up all funds, i.e., ether, sent to the smart contract's account, which, traditionally, would most likely have involved some kind of trustee:
 \\
 \begin{figure}[H]
-\centering
 \begin{lstlisting}
 pragma solidity ^0.6.0;
 
@@ -357,7 +356,6 @@ As mentioned earlier, one of the most popular applications of smart contracts is
 In the Ethereum whitepaper, the following minimalist example of a ``token system in Serpant'' is given: \autocite[20]{buterin2013a}
 \\
 \begin{figure}[H]
-\centering
 \begin{lstlisting}
 def send(to, value):
   if self.storage[msg.sender] >= value:
