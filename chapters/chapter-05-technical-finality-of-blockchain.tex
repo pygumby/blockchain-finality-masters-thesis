@@ -112,17 +112,33 @@ It can be summarized that in PoW-based blockchain systems, a party that controls
 Distributed web services are often categorized according to the CAP theorem, which states that such a service can only simultaneously provide two of the following three properties: \autocite{gilbert2002}
 
 \begin{description}
-\item[Consistency]
+\item[Consistency (C)]
 A ``consistent service'' must establish ``a total order on all operations such that each operation looks as if it were completed at a single instant.''
 In other words, ``requests of the distributed shared memory [must be required] to act as if they were executing on a single node, responding to operations one at a time.''
-\item[Availability]
+\item[Availability (A)]
 An available service must ensure that ``every request received by a non-failing node in the system must result in a response.''
 In other words, ``any algorithm used by the service must eventually terminate.''
 As there is ``no bound on how long the algorithm may run before terminating,'' this can be considered a ``weak definition of availability.''
-\item[Partition tolerance]
+\item[Partition tolerance (P)]
 A partition-tolerant service must withstand partitioning of the underlying network, i.e., ``the network will be allowed to lose arbitrarily many messages sent from one node to another.''
 In other words, network partitioning is present when ``all messages sent from nodes in one component of the partition to nodes in another component are lost.''
 \end{description}
+
+It must be pointed out that the Eric Brewer, the author of the original conjecture, later pointed out that the common interpretation of \enquote{\enquote{2 of 3} is misleading,} essentially stating that since distributed systems must deal with network partitioning in any case, they really can only choose between consistency and availability: \autocite{infoq2012caplater}
+
+\begin{quote}
+  The easiest way to understand CAP is to think of two nodes on opposite sides of a partition. Allowing at least one node to update state will cause the nodes to become inconsistent, thus forfeiting C.
+  Likewise, if the choice is to preserve consistency, one side of the partition must act as if it is unavailable, thus forfeiting A.
+  Only when nodes communicate is it possible to preserve both consistency and availability, thereby forfeiting P.
+  The general belief is that for wide-area systems, designers cannot forfeit P and therefore have a difficult choice between C and A.
+\end{quote}
+
+Brewer also added that the ``2 out of 3'' notion is ``misleading because it tend[s] to oversimplify the tensions among properties,'' stressing that the theorem only prohibits ``perfect availability and consistency in the presence of partitions.'' \autocite{infoq2012caplater}
+In reality, systems can be designed to compromise and provide both properties to some degree: \autocite{infoq2012caplater}
+
+\begin{quote}
+  [A]ll three properties are more continuous than binary. Availability is obviously continuous from 0 to 100 percent, but there are also many levels of consistency, and even partitions have nuances, including disagreement within the system about whether a partition exists.
+\end{quote}
 
 With regards to blockchain systems, consistency means that all nodes assume the same chain to be the correct one at the same time, i.e., they maintain identical copies of the ledger continuously.
 Availability means that non-failing nodes maintain a chain at all times, albeit not necessarily the correct one.
