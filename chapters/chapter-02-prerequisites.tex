@@ -153,7 +153,7 @@ Each node running the timestamp server continuously receives transactions and ``
 For each new block, a node generates a hash, using a cryptographic hashing function.
 Such a function ``maps a typically large, variable-length value [in this case, a block] to a typically small, fixed-length value'' -- the hash. \autocite[6]{baerenfaenger2020a}
 The hash function is a ``one-way function,'' i.e., ``it is practically impossible to infer from the hash the input value.'' \autocite[6]{baerenfaenger2020a}
-The hash that was generated for the very first block in the Bitcoin system is, e.g., \texttt{000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b \\ 60a8ce26f}. \autocite{blockchaincom2020}
+The hash that was generated for the very first block in the Bitcoin system is, e.g., \texttt{000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8c \\ e26f}. \autocite{blockchaincom2020}
 A block's hash (or block hash) can be seen as proof of the block's existence, as ``the [block's] data must have existed at the time, obviously, in order to get [...] the hash [from it].'' \autocite[2]{nakamoto2008}
 
 However, the hash that the timestamp server generates for each new block is not derived from the block's data alone but from the block's data as well as the hash of its preceding block.
@@ -349,7 +349,7 @@ In line 1, the version \texttt{pragma} is set to prevent compilation with compil
 In lines 4--8, the addresses of the (external) accounts of the three participants are stored in an array (\texttt{beneficiaries}).
 In lines 10--16, the \texttt{receive()} function is defined, which is executed whenever a transaction is sent to the contract account.
 It calculates each beneficiary's due (\texttt{individualAmount}) by dividing the amount of received ether (\texttt{msg.value}) by the number of beneficiaries (\texttt{beneficiaries.length}), i.e., three.
-Lastly, a \texttt{for} loop iterates through each of the three participants and transfers them their respective share (\texttt{beneficiaries[i].\\transfer(individualAmount)}).
+Lastly, a \texttt{for} loop iterates through each of the three participants and transfers them their respective share (\texttt{beneficiaries[i].transfer(individualAmount)}).
 Note that this implementation has some serious drawbacks which are accepted for the sake of brevity.
 
 As mentioned earlier, one of the most popular applications of smart contracts is to leverage those to implement alternative tokens on top of Ethereum or similar blockchain systems.
