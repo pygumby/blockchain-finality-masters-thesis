@@ -42,7 +42,7 @@ PvP is also described as a ``settlement standard'' where ``funds of two counterp
 PvP thereby eliminates ``the most important settlement risk, where one counterparty transfers the owed funds without receiving the counter-payment,'' i.e., Herstatt risk. \autocite[6]{schaller2007}
 
 CLS Bank International, an acroym for ``continuous linked settlement,'' was set up to develop the G20 bank's PvP-based solution in 1997 and went into operation in 2002, ``settling transactions involving seven currencies,'' including the euro and the US dollar. \autocite[60-61]{galati2002}
-The BIS publication on settlement risks in FX describes the settlement phases of CLS as summarized in the following steps: \autocite[61-62]{galati2002}
+The aforementioned BIS publication on settlement risks in FX describes the settlement phases of CLS as summarized in the following steps: \autocite[61-62]{galati2002}
 
 \begin{enumerate}
   \item Submission of transactions: ``[M]embers submit [...] transactions to be settled by [...] 00:00 CET.''
@@ -51,10 +51,19 @@ The BIS publication on settlement risks in FX describes the settlement phases of
   \item Settlement of transactions: ``CLS Bank settles each trade over these accounts by simultaneously crediting the buyer’s account in the currency that is bought and debiting the seller’s account in the currency that is sold.''
 \end{enumerate}
 
-From these steps, it can already be inferred that there is a ``clear distinction'' between the funding of settlement accounts and the settlement of transactions, as the former are funded on a net basis while the latter are settled on a gross basis. \autocite[62]{galati2002}
+From these steps, it can be inferred that there is a ``clear distinction'' between the funding of settlement accounts and the settlement of transactions, as the former are funded on a net basis while the latter are settled on a gross basis. \autocite[62]{galati2002}
 
-It can be summarized that ``CLS eliminates credit risk in all but very extreme circumstances'' by leveraging the ``payment-versus-payment principle and the positive account balance rule.'' \autocite[62]{galati2002}
+It can be said that ``CLS eliminates credit risk [arising in FX trades] in all but very extreme circumstances'' by leveraging the ``payment-versus-payment principle and the positive account balance rule.'' \autocite[62]{galati2002}
 With regards to liquidity risk, the issue is, however, ``more complex,'' since ``CLS Bank is not automatically able to pay out to other members in the currencies due.'' \autocite[63]{galati2002}
+
+It must be stressed, however, that PvP-based solutions, including CLS, do not prevent FX transaction legs from being reversed, since such solutions do not shield the latter from disruptive legal effects.
+They do, however, alleviate Herstatt risk, as they technically ensure that either both transaction legs settle with finality or neither.
+Thus, PvP-based solutions do not enable finality but solve a problem arising from the inability to do so -- a problem specific to FX, though.
+
+The reason PvP and, specifically, CLS is presented in this context is not only due to the fact that it is typically mentioned in publications on finality -- it is because PvP represents an archetypal application of smart contracts, corresponding to the very kind of agreement whose digital formalization and execution was envisioned by Nick Szabo and is now enabled by general-purpose blockchain systems such as Ethereum.
+
+It can be summarized that the PvP principle and solutions based on it effectively provide simultaneous settlement of the legs of an FX transaction, thereby greatly alleviating risks arising in the context of finality.
+Albeit being specific to FX, PvP-based solutions are relevant in the context of this thesis, as they are straightforward to implement atop of blockchain systems in the form of smart contracts.
 
 \section{Wholesale payment systems}
 
