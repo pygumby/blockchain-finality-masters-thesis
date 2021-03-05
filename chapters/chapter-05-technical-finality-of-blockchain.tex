@@ -14,7 +14,7 @@ In the course of this, blockchain reorganization, i.e., the relevant part of PoW
 For a better understanding of blockchain reorganization, reconsider relevant parts of blockchain technology:
 At their core, blockchain systems enable the nodes of a decentralized network to reach consensus on a certain value.
 In the particular case of Bitcoin, it is the transaction history, referred to as ledger, on which agreement is reached.
-The consensus algorithm proposed in the original Bitcoin paper and employed in the live Bitcoin network is PoW.
+The consensus algorithm proposed in the Bitcoin paper and employed in the live Bitcoin network is PoW.
 
 According to it, certain nodes referred to as miners bundle transactions they learn of into blocks.
 Miners expend computational power referred to as work to guess a so-called PoW for a block, i.e., a number that when hashed along with the block's data and the preceding block's hash results in a hash that starts with a number of zero bits.
@@ -34,7 +34,7 @@ However, given a block \(k\), two or more subsequent blocks, e.g., \(k + 1\) and
 With some nodes being aware of one chain and others being aware of the other, this is emblematic of the very problem blockchain systems set out to remedy.
 After all, with regards to Bitcoin specifically, block \(k + 1\) could contain a transaction that transfers ownership of a bitcoin \(b\) to a participant \(A\) while block \(k + 1'\) could contain a conflicting transaction that transfers \(b\) to a participant \(B\).
 In other words, it is imperative to reach consensus on which is the ``correct'' chain.
-To this end, the following is stipulated in the original Bitcoin paper: \autocite[3]{nakamoto2008}
+To this end, the following is stipulated in the Bitcoin paper: \autocite[3]{nakamoto2008}
 
 \begin{quote}
   Nodes always consider the longest chain to be the correct one and [mining nodes] will keep working on extending it.
@@ -80,7 +80,7 @@ One key metric is the amount of processing power that is in the hands of ``hones
 The more processing power an attacker has in relation to all other miners in the network, which are assumed to be honest, i.e., the larger an attacker's share of the total hash rate is, the faster they can mine their own chain in relation to the speed at which all other miners work on the main chain.
 And the faster they can mine their own chain, the more likely it is that it eventually overtakes the main chain, enabling the attacker to void any transaction contained in the latter.
 
-The original Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby \(p\) is the ``probability an honest node finds the next block,'' \(q\) is the probability an attacker does so and \(z\) is the number of ``blocks [that] have been linked after [the block containing the transaction in question].''
+The Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby \(p\) is the ``probability an honest node finds the next block,'' \(q\) is the probability an attacker does so and \(z\) is the number of ``blocks [that] have been linked after [the block containing the transaction in question].''
 
 % Indentation would destroy the output...
 \begin{quote}
