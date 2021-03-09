@@ -296,7 +296,7 @@ The state $0'$ corresponds to scenario $1$ of the algorithm as outlined above.
 The three edges leading from state $0'$ to state $0$ correspond to the three scenarios 1(a), 1(b) and 1(c), respectively.
 
 $\alpha$ denotes the relative mining power of the selfish miners and $1 - \alpha$ that of the honest ones.
-E.g., if $\alpha = .3$, the selfish miners chances of  leading by one block is 30\%, by two blocks 9\%, diminishing exponentially.
+E.g., if $\alpha = 0.3$, the selfish miners chances of  leading by one block is 30\%, by two blocks 9\%, diminishing exponentially.
 $\gamma$ denotes the ratio of honest miners that accept and, thus, build on top of a block announced by the selfish miners and $1 - \gamma$ the ratio of honest miners that accept the competing honest miners' block.
 E.g., if $\gamma = 0$, honest miners will never mine on top of a block published by the selfish miners, if $\gamma = 1$, they always will.
 \\
@@ -315,7 +315,7 @@ Selfish mining compares to this as follows:
 \item
 If $\gamma = 0$, i.e., if the selfish miners lose every block race, which is the key factor in scenario 1, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 33\%.
 \item
-If $\gamma = .5$, i.e., if the selfish miners win every other block race, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 25\%.
+If $\gamma = 0.5$, i.e., if the selfish miners win every other block race, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 25\%.
 \item
 If $\gamma = 1$, i.e., if the selfish miners win every block race, selfish mining is more profitable than mining according to protocol at all times, independently of the selfish miners' relative hash rate.
 \end{itemize}
