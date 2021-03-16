@@ -34,7 +34,7 @@ However, given a block $k$, two or more subsequent blocks, e.g., $k + 1$ and $k 
 With some nodes being aware of one chain and others being aware of the other, this is emblematic of the very problem blockchain systems set out to remedy.
 After all, with regards to Bitcoin specifically, block $k + 1$ could contain a transaction that transfers ownership of a bitcoin $b$ to a participant A while block $k + 1'$ could contain a conflicting transaction that transfers $b$ to a participant B.
 In other words, it is imperative to reach consensus on which is the ``correct'' chain.
-To this end, the following is stipulated in the Bitcoin paper: \autocite[3]{nakamoto2008}
+To this end, the following is stipulated in the Bitcoin paper: \autocite[3]{bitcoin2008paper}
 
 \begin{quote}
   Nodes always consider the longest chain to be the correct one and [mining nodes] will keep working on extending it.
@@ -46,7 +46,7 @@ To this end, the following is stipulated in the Bitcoin paper: \autocite[3]{naka
 For the sake of correctness, note that the Bitcoin paper implicitly describes the ``longest chain'' as the chain that consists of most blocks.
 In practice, this turned out to constitute a vulnerability, as this notion of the longest chain does not necessarily represent the chain that was created with most computational power.
 Thus, the longest chain is rather to be interpreted as the chain that has most work invested in it.
-This realization was reflected in a change to the Bitcoin source code in 2010. \autocite{github2010workvsheight}
+This realization was reflected in a change to the Bitcoin source code in 2010. \autocite{github2010bitcoinworkvsheight}
 However, for the sake of simplicity, this paper illustrates the longest chain as the one consisting of the most blocks.
 
 As an example, take again the occurrence of two blocks at block height $k + 1$.
@@ -164,13 +164,13 @@ It was previously described that with the PoW consensus algorithm, the blockchai
 The obvious question, then, is to what extent this occurs in practice in Bitcoin, i.e., in the largest PoW-based blockchain system.
 
 However, since the Bitcoin network is decentralized, there is no ``bird's eye view'' on it, which would be necessary to become aware of all forks.
-To use the words of a user in the Bitcoin community on Stack Exchange, ``[t]he problem with blockchain forks is that once they are resolved the only trace they leave is a log entry,'' \autocite{sebitcoin2012longestfork} referring to the logs of the individual node(s) that carried out the reorg in question.
+To use the words of a user in the Bitcoin community on Stack Exchange, ``[t]he problem with blockchain forks is that once they are resolved the only trace they leave is a log entry,'' \autocite{stackexchange2017bitcoinforks} referring to the logs of the individual node(s) that carried out the reorg in question.
 Thus, an answer to the above question cannot be given comprehensively but can only be approximated.
 
 It can be said that assuming normal operation, the occurrence of stale blocks is quite rare, as the Bitcoin block interval is 10 minutes while the median block propagation time in 2014/15 was 8.7 seconds. \autocite[7]{croman2016}
 In 2016, ETH Zürich researchers reported Bitcoin's stale block rate at 0.41\%, measured over 10000 blocks. \autocite[3]{gervais2016}
 This corresponds to roughly 18 stale block per month.
-The nodes of BitMEX's ForkMonitor pick up fewer than that, e.g., creating only four ``stale block candidates'' alerts in 12/2020 and 01/2021, respectively. \autocite{bitmex2021}
+The nodes of BitMEX's ForkMonitor pick up fewer than that, e.g., creating only four ``stale block candidates'' alerts in 12/2020 and 01/2021, respectively. \autocite{forkmonitor2021staleblocks}
 
 Most incidents where two or more blocks exist on the same block height are less relevant in the context of finality, because most of these forks are resolved with the next block or so.
 Since it is customary to wait for six confirmations until a transaction is deemed final, the reversal of a transaction due to its containing block becoming stale will, in practice, only be perceived as a reversal unless said block had at least five blocks appended to it.
@@ -179,7 +179,7 @@ More relevant in the context of finality is the latter scenario, i.e., the orpha
 It cannot be overstated that in the Bitcoin system, this happened, and more than once.
 
 Before listing such incidents, the concepts ``softfork'' \autocite{bitcoinwiki2018softfork} and ``hardfork'' \autocite{bitcoinwiki2019hardfork} must be introduced.
-Both represent an update to the software run by the nodes of a blockchain system, e.g., Bitcoin Core \autocite{github2021bitcoincore}.
+Both represent an update to the software run by the nodes of a blockchain system, e.g., Bitcoin Core \autocite{github2021bitcoin}.
 Updated nodes follow a rule that is not followed by not-updated nodes.
 Most often, as a result, certain blocks produced by not-updated nodes are no longer accepted as valid blocks by updated nodes.
 
@@ -216,16 +216,16 @@ On March 11, 2013, miners running version 0.8 of the Bitcoin software created bl
 Version 0.8 switched the underlying database from BerkeleyDB to LevelDB, inadvertently introducing an incompatibility, thus, constituting an accidental hardfork.
 The blockchain forked at block height 225430.
 After miners were asked to switch back to version 0.7, the majority hash rate backed the ``version 0.7 chain,'' and the blockchain reconverged at block height 225454, causing 24 blocks to become stale.
-\autocite{buterin2013}
+\autocite{bitcoinmag2013bitcoinfork}
 \item[Invalid blocks incident]
 On July 4, 2015, invalid blocks were created.
 Miners failed to validate these and built on top of them, as ``[a]lmost all''  instances of the software ``besides Bitcoin Core 0.9.5 and later'' were unable to detect their invalidity. \autocite{bitcoin2015invalidblocks}
-The latter versions implemented BIP66 \autocite{github2015bip66} to no longer depend on OpenSSL's signature parsing, constituting a softfork.
+The latter versions implemented BIP66 \autocite{github2015bitcoinbip66} to no longer depend on OpenSSL's signature parsing, constituting a softfork.
 The blockchain forked at block height 363731 and reconverged at block height 363737, causing 6 blocks to become stale.
-\autocite{rbitcoin2015invalidblocks}
+\autocite{reddit2015bitcoininvalidblocks}
 \end{description}
 
-For a more comprehensive compilation of such incidents, refer to BitMex's ``[more] complete history of Bitcoin's consensus forks.'' \autocite{bitmex2262}
+For a more comprehensive compilation of such incidents, refer to BitMex's ``[more] complete history of Bitcoin's consensus forks.'' \autocite{bitmex2017bitcoinforkhistory}
 
 Obviously, transaction reversal due to forks affects all PoW-based blockchain systems, not just Bitcoin.
 In 2016, Ethereum, the second largest blockchain system, suffered the most prominent chain split of all.
@@ -238,7 +238,7 @@ What all these incidents have in common is that a small group of developers rele
 Firstly, this shows that these systems are, in fact, rather centralized and, secondly, that these incidents amount to what technically are 51\% attacks, despite all good intentions.
 
 What sounds like an exaggeration is actually documented on the respective projects' web sites.
-E.g., in the wake of the database switch incident, influential Bitcoin Core contributor Pieter Wuille publicly instructs miners on which chain to extend, confidently adding that since mining pool ``BTCGuild is switching'' to it, the desired chain ``will get a majority hash rate soon.'' \autocite{bitcointalkorg2013databaseswitchincident}
+E.g., in the wake of the database switch incident, influential Bitcoin Core contributor Pieter Wuille publicly instructs miners on which chain to extend, confidently adding that since mining pool ``BTCGuild is switching'' to it, the desired chain ``will get a majority hash rate soon.'' \autocite{bitcointalk2013databaseswitchincident}
 
 Given that individual mining pools have at times held the majority of the computational power in the entire Bitcoin system, e.g., mining pool ``GHash.io'' in 2014 \autocite[222]{boehme2015}, it should come as no surprise that all it takes to alter the blockchain, i.e., to reverse transactions, is the cooperation between few influential individuals.
 
@@ -321,7 +321,7 @@ If $\gamma = 1$, i.e., if the selfish miners win every block race, selfish minin
 \end{itemize}
 
 In any case, the selfish miners' relative revenue increases asymptotically with their relative hash rate, reaching 100\% of total revenue with only 50\% of the total hash rate.
-Furthermore, as one of the authors points out in a talk at the Israel Institute for Advanced Studies \autocite{youtube2018alttonakamotoconsensus}, ``you can get $\gamma$ to be fairly high,'' as ``you can fracture the network,'' referring to the 2013-paper ``Information Propagation in the Bitcoin Network.'' \autocite{decker2013}
+Furthermore, as one of the authors points out in a talk at the Israel Institute for Advanced Studies \autocite{youtube2018alternativestotonakamotoconsensus}, ``you can get $\gamma$ to be fairly high,'' as ``you can fracture the network,'' referring to the 2013-paper ``Information Propagation in the Bitcoin Network.'' \autocite{decker2013}
 
 Most scary, however, is the observation that it is rational for miners to  ``join the selfish pool to increase their revenues.''
 In the aforementioned talk, ``pool formation'' is described as follows:
@@ -336,7 +336,7 @@ After all, the additional income of the selfish miners is to the detriment of th
 One way or another, ultimately, ``[t]he selfish pool would [...] increase in size, unopposed by any mechanism, until it becomes a majority.''
 
 With selfish mining incentivizing the formation of ever-growing pools of selfish miners, the question arises whether selfish mining has actually occurred in practice and whether it has lead to the formation of pools holding a majority hash rate.
-The authors of the selfish mining paper respond to this \autocite{hackingd2014detectsm} by stating that the two ``distinct network signatures of selfish mining'' are the ``[n]umber of abandoned (orphaned) blocks,'' which, as mentioned before, is very hard to establish, as ``abandoned blocks are pruned inside the Bitcoin network,'' and the ``[t]iming of successive blocks,'' which bears difficulties as well, as ``timing gap analysis [...] is a statistical test, and it may take a fair bit of selfish mining activity before it detects that something is amiss.''
+The authors of the selfish mining paper respond to this \autocite{hackingdistributed2014detectselfishminers} by stating that the two ``distinct network signatures of selfish mining'' are the ``[n]umber of abandoned (orphaned) blocks,'' which, as mentioned before, is very hard to establish, as ``abandoned blocks are pruned inside the Bitcoin network,'' and the ``[t]iming of successive blocks,'' which bears difficulties as well, as ``timing gap analysis [...] is a statistical test, and it may take a fair bit of selfish mining activity before it detects that something is amiss.''
 While the authors say that it probably did not take place yet, they, at the same time, imply that if it had, it would have been difficult to detect.
 
 Be that as it may, what can be summarized is that, in addition to the fact that PoW not only allows for transaction reversal in theory but has enabled such incidents in practice, PoW is also incentive incompatible in that the rational strategy for miners is not only to game PoW-based blockchain systems but to coalesce in order to do so.
@@ -345,7 +345,7 @@ In other words, such systems incentivize the formation of an attacker pool that 
 \subsection{Extrinsic incentives}
 
 Many of the proposed attacks on PoW-based blockchain systems, including selfish mining, reward those who employ them with tokens of the system's native cryptocurrency, so it is in the attackers' best interest to not break such systems by reversing transactions, as this would devalue their own revenue.
-This incentive is already expressed in the Bitcoin paper: \autocite[4]{nakamoto2008}
+This incentive is already expressed in the Bitcoin paper: \autocite[4]{bitcoin2008paper}
 
 \begin{quote}
 If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments [i.e., reversing transactions], or using it to generate new coins [i.e., engaging in mining as prescribed].
@@ -427,9 +427,9 @@ In the course of this, the Stellar Consensus Protocol is introduced, which, to t
 
 With Stellar, there exists one blockchain system that puts special emphasis on finality.
 Its consensus algorithm, the Stellar Consensus Protocol (SCP), guarantees so-called ``issuer-enforced finality'' without sacrificing  ``[o]pen membership'' \autocite[1]{lokhava2019}, a hallmark of decentralization.
-However, unlike PoW, which assumes a trustless environment, SCP is based on ``flexible trust'' \autocite[2]{mazieres2016}, thereby solving a slightly different problem than PoW.
+However, unlike PoW, which assumes a trustless environment, SCP is based on ``flexible trust'' \autocite[2]{mazieres2016scp}, thereby solving a slightly different problem than PoW.
 
-SCP is ``a construction for,'' i.e., type of, federated Byzantine agreement (FBA), \autocite[2]{mazieres2016} which was introduced along with SCP and is, in turn, a generalization of traditional Byzantine agreement (BA) \autocite[5]{mazieres2016}.
+SCP is ``a construction for,'' i.e., type of, federated Byzantine agreement (FBA), \autocite[2]{mazieres2016scp} which was introduced along with SCP and is, in turn, a generalization of traditional Byzantine agreement (BA) \autocite[5]{mazieres2016scp}.
 Traditional BA enables a set of $n$ nodes to reach consensus on one ``value of information'' by voting based on ``two-party messages,'' assuming $n \geq 3m + 1$, where $m$ is the number of ``faulty'' or malicious nodes. \autocite{lamport1980}
 
 In traditional BA, the nodes have to be known beforehand, though, which contradicts decentralization, ``where two nodes may not even know of each other’s existence.'' \autocite[4]{lokhava2019}
@@ -476,14 +476,14 @@ SCP defines these as follows:
 \begin{description}
 \item[Safety]
 ``A Byzantine agreement protocol is safe when no two well-behaved nodes output different decisions and the unique decision was a valid input.'' \autocite[3]{lokhava2019}
-The former property is referred to as ``agreement'' and the latter as ``validity.'' \autocite{mazieres2019}
+The former property is referred to as ``agreement'' and the latter as ``validity.'' \autocite{mazieres2019safetyvsliveness}
 \item[Liveness]
 ``A protocol is live when it guarantees that every honest node eventually outputs a decision.''
 \autocite[4]{lokhava2019}
 \end{description}
 
-``Unfortunately, achieving all three of safety, guaranteed termination [i.e., liveness], and fault tolerance turns out to be impossible.'' \autocite{mazieres2019}
-In SCP, this dilemma manifests itself in the fact that the increasing size of quorums is, on the one hand, conducive to safety, but, on the other hand, detrimental to liveness. \autocite{mazieres2019}
+``Unfortunately, achieving all three of safety, guaranteed termination [i.e., liveness], and fault tolerance turns out to be impossible.'' \autocite{mazieres2019safetyvsliveness}
+In SCP, this dilemma manifests itself in the fact that the increasing size of quorums is, on the one hand, conducive to safety, but, on the other hand, detrimental to liveness. \autocite{mazieres2019safetyvsliveness}
 
 SCP chooses to prioritize safety over liveness, as ``the consequences of a safety failure (namely double-spent digital money) are far worse than those of a liveness failure (namely delays in payments that anyway took days before Stellar).''
 Thus, people who run nodes are actively encouraged to ``select large quorum slices,'' which increases intertwinedness, which, in turn, is the aforementioned condition for SCP to guarantee agreement.
@@ -521,7 +521,7 @@ This duality is reflected in Stellar's design goal ``to let entities (safely) is
 This willingness to compromise and take the best of both worlds, centralized and decentralized, is not limited to Stellar's take on stablecoins but is emblematic of Stellar's philosophy in general.
 It is reflected in SCP as a whole, as SCP, like PoW, facilitates agreement between the nodes of a decentralized network, but, unlike PoW, discards the assumption of trustlessness and, instead, is based the principle of flexible trust.
 
-While this means that Stellar is technically ``solving a different, weaker problem than Bitcoin,'' \autocite{hackernoon2018ccfinality} it cannot be overstated that in doing so, it manages to shed Bitcoin's greatest shortcoming, i.e., the fact that transaction reversal is embodied in its consensus algorithm PoW.
+While this means that Stellar is technically ``solving a different, weaker problem than Bitcoin,'' \autocite{hackernoon2018cryptocurrencyfinality} it cannot be overstated that in doing so, it manages to shed Bitcoin's greatest shortcoming, i.e., the fact that transaction reversal is embodied in its consensus algorithm PoW.
 This is not to mention that by discarding Bitcoin's assumption of trustlessness as well as its disdain for centralized institutions, Stellar also discards properties of Bitcoin that have been traced to right-wing ideology.
 
 It can be summarized that Stellar supports absolute finality in the sense that its consensus algorithm, SCP, has no notion of transaction reversal, as it, unlike Bitcoin, favors consistency over availability, of which one has to be sacrificed in a distributed system according to the CAP theorem.
