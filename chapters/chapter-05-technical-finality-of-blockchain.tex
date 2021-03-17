@@ -26,9 +26,9 @@ Given the transactions in it are valid, other miners will accept the block and s
 However, given a block $k$, two or more subsequent blocks, e.g., $k + 1$ and $k + 1'$, may happen to be announced roughly at the same time, splitting or ``forking'' \autocite{bitcoinwiki2015fork} the blockchain into two or more alternative chains.
 \\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-01.svg}
-\caption*{Fork due to two blocks at block height $k + 1$}
+	\centering
+	\includesvg{figures/figure-01.svg}
+	\caption*{Fork due to two blocks at block height $k + 1$}
 \end{figure}
 
 With some nodes being aware of one chain and others being aware of the other, this is emblematic of the very problem blockchain systems set out to remedy.
@@ -37,10 +37,10 @@ In other words, it is imperative to reach consensus on which is the ``correct'' 
 To this end, the following is stipulated in the Bitcoin paper: \autocite[3]{bitcoin2008paper}
 
 \begin{quote}
-  Nodes always consider the longest chain to be the correct one and [mining nodes] will keep working on extending it.
-  If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first.
-  In that case, they work on the first one they received, but save the other branch in case it becomes longer.
-  The tie will be broken when the next proof-of-work is found and one branch becomes longer; the nodes that were working on the other branch will then switch to the longer one.
+	Nodes always consider the longest chain to be the correct one and [mining nodes] will keep working on extending it.
+	If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first.
+	In that case, they work on the first one they received, but save the other branch in case it becomes longer.
+	The tie will be broken when the next proof-of-work is found and one branch becomes longer; the nodes that were working on the other branch will then switch to the longer one.
 \end{quote}
 
 For the sake of correctness, note that the Bitcoin paper implicitly describes the ``longest chain'' as the chain that consists of most blocks.
@@ -55,9 +55,9 @@ Nodes learning of the latter branch, i.e., the longer branch, will accept it as 
 Thereby, all nodes will eventually agree on one chain.
 \\
 \begin{figure}[H]
-  \centering
-  \includesvg{figures/figure-02.svg}
-  \caption*{Two alternative chains, one being the longer, ``correct'' one}
+	\centering
+	\includesvg{figures/figure-02.svg}
+	\caption*{Two alternative chains, one being the longer, ``correct'' one}
 \end{figure}
 
 The process in which a node discards a previous chain and accepts a longer one that it just learned of is called chain reorganization (or ``reorg''). 
@@ -84,11 +84,11 @@ The Bitcoin paper presents some calculations on the probability of an attacker c
 
 % Indentation would destroy the output...
 \begin{quote}
-Given our assumption that $p > q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. [...]
-  
-Solving for P less than 0.1\%...
-  
-\begin{verbatim}
+	Given our assumption that $p > q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. [...]
+
+	Solving for P less than 0.1\%...
+
+	\begin{verbatim}
 P < 0.001
 q=0.10   z=5
 q=0.15   z=8
@@ -98,7 +98,7 @@ q=0.30   z=24
 q=0.35   z=41
 q=0.40   z=89
 q=0.45   z=340
-\end{verbatim}
+	\end{verbatim}
 \end{quote}
 
 These calculations have given rise to the conventional wisdom to wait for a transaction to be ``confirmed'' \autocite{bitcoinwiki2018confirmation} six times, i.e., to wait for it to be accepted into $1$ block and then wait for that block to have another $z = 5$ blocks appended to it.
@@ -112,32 +112,33 @@ It can be summarized that in PoW-based blockchain systems, a party that controls
 Distributed web services are often categorized according to the CAP theorem, which states that such a service can only simultaneously provide two of the following three properties: \autocite{gilbert2002}
 
 \begin{description}
-\item[Consistency (C)]
-A ``consistent service'' must establish ``a total order on all operations such that each operation looks as if it were completed at a single instant.''
-In other words, ``requests of the distributed shared memory [must be required] to act as if they were executing on a single node, responding to operations one at a time.''
-\item[Availability (A)]
-An available service must ensure that ``every request received by a non-failing node in the system must result in a response.''
-In other words, ``any algorithm used by the service must eventually terminate.''
-As there is ``no bound on how long the algorithm may run before terminating,'' this can be considered a ``weak definition of availability.''
-\item[Partition tolerance (P)]
-A partition-tolerant service must withstand partitioning of the underlying network, i.e., ``the network will be allowed to lose arbitrarily many messages sent from one node to another.''
-In other words, network partitioning is present when ``all messages sent from nodes in one component of the partition to nodes in another component are lost.''
+	\item[Consistency (C)]
+		A ``consistent service'' must establish ``a total order on all operations such that each operation looks as if it were completed at a single instant.''
+		In other words, ``requests of the distributed shared memory [must be required] to act as if they were executing on a single node, responding to operations one at a time.''
+	\item[Availability (A)]
+		An available service must ensure that ``every request received by a non-failing node in the system must result in a response.''
+		In other words, ``any algorithm used by the service must eventually terminate.''
+		As there is ``no bound on how long the algorithm may run before terminating,'' this can be considered a ``weak definition of availability.''
+	\item[Partition tolerance (P)]
+		A partition-tolerant service must withstand partitioning of the underlying network, i.e., ``the network will be allowed to lose arbitrarily many messages sent from one node to another.''
+		In other words, network partitioning is present when ``all messages sent from nodes in one component of the partition to nodes in another component are lost.''
 \end{description}
 
 It must be pointed out that the Eric Brewer, the author of the original conjecture, later pointed out that the common interpretation of \enquote{\enquote{2 of 3} is misleading,} essentially stating that since distributed systems must deal with network partitioning in any case, they really can only choose between consistency and availability: \autocite{infoq2012caplater}
 
 \begin{quote}
-  The easiest way to understand CAP is to think of two nodes on opposite sides of a partition. Allowing at least one node to update state will cause the nodes to become inconsistent, thus forfeiting C.
-  Likewise, if the choice is to preserve consistency, one side of the partition must act as if it is unavailable, thus forfeiting A.
-  Only when nodes communicate is it possible to preserve both consistency and availability, thereby forfeiting P.
-  The general belief is that for wide-area systems, designers cannot forfeit P and therefore have a difficult choice between C and A.
+	The easiest way to understand CAP is to think of two nodes on opposite sides of a partition. Allowing at least one node to update state will cause the nodes to become inconsistent, thus forfeiting C.
+	Likewise, if the choice is to preserve consistency, one side of the partition must act as if it is unavailable, thus forfeiting A.
+	Only when nodes communicate is it possible to preserve both consistency and availability, thereby forfeiting P.
+	The general belief is that for wide-area systems, designers cannot forfeit P and therefore have a difficult choice between C and A.
 \end{quote}
 
 Brewer also added that the ``2 out of 3'' notion is ``misleading because it tend[s] to oversimplify the tensions among properties,'' stressing that the theorem only prohibits ``perfect availability and consistency in the presence of partitions.'' \autocite{infoq2012caplater}
 In reality, systems can be designed to compromise and provide both properties to some degree: \autocite{infoq2012caplater}
 
 \begin{quote}
-  [A]ll three properties are more continuous than binary. Availability is obviously continuous from 0 to 100 percent, but there are also many levels of consistency, and even partitions have nuances, including disagreement within the system about whether a partition exists.
+	[A]ll three properties are more continuous than binary.
+	Availability is obviously continuous from 0 to 100 percent, but there are also many levels of consistency, and even partitions have nuances, including disagreement within the system about whether a partition exists.
 \end{quote}
 
 With regards to blockchain systems, consistency means that all nodes assume the same chain to be the correct one at the same time, i.e., they maintain identical copies of the ledger continuously.
@@ -187,9 +188,9 @@ Consequently, not-updated miners keep extending the blockchain by appending bloc
 In other words, such an update causes the blockchain to fork.
 \\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-03.svg}
-\caption*{Two alternative chains, caused by either a softfork or a hardfork}
+	\centering
+	\includesvg{figures/figure-03.svg}
+	\caption*{Two alternative chains, caused by either a softfork or a hardfork}
 \end{figure}
 
 In the case of a softfork, the not-updated nodes accept the blocks created by the updated nodes, i.e., a softfork is backwards-compatible.
@@ -204,25 +205,25 @@ With softforks and hardforks defined, find below a compilation of incidents wher
 For the same reasons elaborated on before, this compilation cannot be considered complete.
 
 \begin{description}
-\item[Value overflow incident]
-On August 15, 2010, a bug in the Bitcoin Core software was exploited to create a transaction that transferred roughly 184 billion bitcoins to three different addresses, although Bitcoin imposes a limit of roughly 21 million bitcoins to ever come into existence.
-The underlying vulnerability was that integer overflows were not checked for.
-After five hours, an update, i.e., a softfork, was rolled out to invalidate the respective block 74638.
-Its containing chain was overtaken at block height 74691, thus, 53 blocks became stale.
-\autocite{bitcoinwiki2016valueoverflowincident}
-This is likely the longest chain to ever be orphaned in Bitcoin.
-\item[Database switch incident]
-On March 11, 2013, miners running version 0.8 of the Bitcoin software created blocks that were rejected by nodes running earlier versions.
-Version 0.8 switched the underlying database from BerkeleyDB to LevelDB, inadvertently introducing an incompatibility, thus, constituting an accidental hardfork.
-The blockchain forked at block height 225430.
-After miners were asked to switch back to version 0.7, the majority hash rate backed the ``version 0.7 chain,'' and the blockchain reconverged at block height 225454, causing 24 blocks to become stale.
-\autocite{bitcoinmag2013bitcoinfork}
-\item[Invalid blocks incident]
-On July 4, 2015, invalid blocks were created.
-Miners failed to validate these and built on top of them, as ``[a]lmost all''  instances of the software ``besides Bitcoin Core 0.9.5 and later'' were unable to detect their invalidity. \autocite{bitcoin2015invalidblocks}
-The latter versions implemented BIP66 \autocite{github2015bitcoinbip66} to no longer depend on OpenSSL's signature parsing, constituting a softfork.
-The blockchain forked at block height 363731 and reconverged at block height 363737, causing 6 blocks to become stale.
-\autocite{reddit2015bitcoininvalidblocks}
+	\item[Value overflow incident]
+		On August 15, 2010, a bug in the Bitcoin Core software was exploited to create a transaction that transferred roughly 184 billion bitcoins to three different addresses, although Bitcoin imposes a limit of roughly 21 million bitcoins to ever come into existence.
+		The underlying vulnerability was that integer overflows were not checked for.
+		After five hours, an update, i.e., a softfork, was rolled out to invalidate the respective block 74638.
+		Its containing chain was overtaken at block height 74691, thus, 53 blocks became stale.
+		\autocite{bitcoinwiki2016valueoverflowincident}
+		This is likely the longest chain to ever be orphaned in Bitcoin.
+	\item[Database switch incident]
+		On March 11, 2013, miners running version 0.8 of the Bitcoin software created blocks that were rejected by nodes running earlier versions.
+		Version 0.8 switched the underlying database from BerkeleyDB to LevelDB, inadvertently introducing an incompatibility, thus, constituting an accidental hardfork.
+		The blockchain forked at block height 225430.
+		After miners were asked to switch back to version 0.7, the majority hash rate backed the ``version 0.7 chain,'' and the blockchain reconverged at block height 225454, causing 24 blocks to become stale.
+		\autocite{bitcoinmag2013bitcoinfork}
+	\item[Invalid blocks incident]
+		On July 4, 2015, invalid blocks were created.
+		Miners failed to validate these and built on top of them, as ``[a]lmost all''  instances of the software ``besides Bitcoin Core 0.9.5 and later'' were unable to detect their invalidity. \autocite{bitcoin2015invalidblocks}
+		The latter versions implemented BIP66 \autocite{github2015bitcoinbip66} to no longer depend on OpenSSL's signature parsing, constituting a softfork.
+		The blockchain forked at block height 363731 and reconverged at block height 363737, causing 6 blocks to become stale.
+		\autocite{reddit2015bitcoininvalidblocks}
 \end{description}
 
 For a more comprehensive compilation of such incidents, refer to BitMex's ``[more] complete history of Bitcoin's consensus forks.'' \autocite{bitmex2017bitcoinforkhistory}
@@ -265,30 +266,30 @@ Their private chain is then ahead of the public chain by one block.
 This leads to two alternative scenarios:
 
 \begin{enumerate}
-\item 
-The honest miners find a block as well, making the two chains equally long.
-This causes the selfish miners to announce to the network the block they kept private immediately, as the honest miners will try to create a block on top of whichever block they learn of first, i.e., they will either work on extending the honest miners’ or the selfish miners’ chain.
-Obviously, the selfish miners will try to add another block on top of their block.
-This, in turn, leads to three alternative scenarios:
-\begin{enumerate}
-\item
-The selfish miners find another block on top of their block, which they publish as well and, thus, gain the revenue of both their blocks, as these now represent the longest chain, while the honest miners' block has become stale.
-\item
-The honest miners find a block on top of the selfish miners' block, causing both the honest miners and the selfish miners to gain the revenue for their one block, respectively.
-\item
-The honest miners find a block on top of their block, gaining the revenue of both their blocks, while causing the selfish miners to gain no revenue at all, since their block has become stale.
-\end{enumerate}
-\item
-The selfish miners find a second block, causing their private chain to be ahead of the public chain by two blocks.
-The selfish miners will try to find more blocks to add on top of their private chain.
-Whenever the honest miners add a new block to the public chain, the selfish miners announce to the network their oldest private block.
-Once the honest miners’ public chain has caught up so that it is only one block behind the selfish miners' private chain, the selfish miners publish their entire private chain, gaining the revenue for all its blocks.
+	\item 
+		The honest miners find a block as well, making the two chains equally long.
+		This causes the selfish miners to announce to the network the block they kept private immediately, as the honest miners will try to create a block on top of whichever block they learn of first, i.e., they will either work on extending the honest miners’ or the selfish miners’ chain.
+		Obviously, the selfish miners will try to add another block on top of their block.
+		This, in turn, leads to three alternative scenarios:
+		\begin{enumerate}
+			\item
+				The selfish miners find another block on top of their block, which they publish as well and, thus, gain the revenue of both their blocks, as these now represent the longest chain, while the honest miners' block has become stale.
+			\item
+				The honest miners find a block on top of the selfish miners' block, causing both the honest miners and the selfish miners to gain the revenue for their one block, respectively.
+			\item
+				The honest miners find a block on top of their block, gaining the revenue of both their blocks, while causing the selfish miners to gain no revenue at all, since their block has become stale.
+		\end{enumerate}
+	\item
+		The selfish miners find a second block, causing their private chain to be ahead of the public chain by two blocks.
+		The selfish miners will try to find more blocks to add on top of their private chain.
+		Whenever the honest miners add a new block to the public chain, the selfish miners announce to the network their oldest private block.
+		Once the honest miners’ public chain has caught up so that it is only one block behind the selfish miners' private chain, the selfish miners publish their entire private chain, gaining the revenue for all its blocks.
 \end{enumerate}
 \leavevmode\\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-04.svg}
-\caption*{Scenarios 1(a), 1(b) and 1(c), with the selfish miners' blocks dashed}
+	\centering
+	\includesvg{figures/figure-04.svg}
+	\caption*{Scenarios 1(a), 1(b) and 1(c), with the selfish miners' blocks dashed}
 \end{figure}
 
 The selfish mining paper illustrates probabilities with the state machine depicted below, where the states $0, 1, ..., n$ correspond to the number of blocks that the selfish miners' private chain is ahead of the honest miners' public chain.
@@ -301,23 +302,21 @@ $\gamma$ denotes the ratio of honest miners that accept and, thus, build on top 
 E.g., if $\gamma = 0$, honest miners will never mine on top of a block published by the selfish miners, if $\gamma = 1$, they always will.
 \\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-05.svg}
-\caption*{
-  Markov chain modeling states and probabilities of selfish mining \autocite[8]{eyal2014}
-}
+	\centering
+	\includesvg{figures/figure-05.svg}
+	\caption*{Markov chain modeling states and probabilities of selfish mining \autocite[8]{eyal2014}}
 \end{figure}
 
 The profitability of selfish mining is presented in contrast to the profitability of mining as prescribed by the PoW algorithm, where a miner's relative computational power corresponds to the miner's relative revenue, e.g., a miner with 10\% of the total hash rate is expected to earn, on average, 10\% of the total revenue.
 Selfish mining compares to this as follows:
 
 \begin{itemize}
-\item
-If $\gamma = 0$, i.e., if the selfish miners lose every block race, which is the key factor in scenario 1, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 33\%.
-\item
-If $\gamma = 0.5$, i.e., if the selfish miners win every other block race, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 25\%.
-\item
-If $\gamma = 1$, i.e., if the selfish miners win every block race, selfish mining is more profitable than mining according to protocol at all times, independently of the selfish miners' relative hash rate.
+	\item
+		If $\gamma = 0$, i.e., if the selfish miners lose every block race, which is the key factor in scenario 1, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 33\%.
+	\item
+		If $\gamma = 0.5$, i.e., if the selfish miners win every other block race, selfish mining is more profitable than mining according to protocol whenever the selfish miners' relative hash rate exceeds 25\%.
+	\item
+		If $\gamma = 1$, i.e., if the selfish miners win every block race, selfish mining is more profitable than mining according to protocol at all times, independently of the selfish miners' relative hash rate.
 \end{itemize}
 
 In any case, the selfish miners' relative revenue increases asymptotically with their relative hash rate, reaching 100\% of total revenue with only 50\% of the total hash rate.
@@ -348,8 +347,8 @@ Many of the proposed attacks on PoW-based blockchain systems, including selfish 
 This incentive is already expressed in the Bitcoin paper: \autocite[4]{bitcoin2008paper}
 
 \begin{quote}
-If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments [i.e., reversing transactions], or using it to generate new coins [i.e., engaging in mining as prescribed].
-He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
+	If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments [i.e., reversing transactions], or using it to generate new coins [i.e., engaging in mining as prescribed].
+	He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
 \end{quote}
 
 This incentive presumably applies within the implied game-theoretic model, which is, however, limited in scope to the Bitcoin ecosystem.
@@ -368,18 +367,18 @@ The total hash rate was taken from whattomine \autocite{whattomine2021bitcoin}, 
 As can be seen from the table, my results roughly correspond to the data published by Messari \autocite{messari2021bitcoin} and Crypto51 \autocite{crypto512021bitcoin}.
 \\
 \begin{table}[H]
-\small
-\centering
-\begin{tabular}{@{}lrr@{}}
-\toprule
- & \multicolumn{1}{l}{\textbf{2021-02-22}} & \multicolumn{1}{l}{\textbf{2020-12-02}} \\ \midrule
-\textbf{\begin{tabular}[c]{@{}l@{}}Total hash rate\\ in PH/s\end{tabular}} & 143,324.81 & \begin{tabular}[c]{@{}r@{}}114,915.00\end{tabular} \\ \midrule
-\textbf{\begin{tabular}[c]{@{}l@{}}Rental prices\\ in BTC/PH/s/d\end{tabular}} & 0.0075 & \begin{tabular}[c]{@{}r@{}}0.008\end{tabular} \\ \midrule
-\textbf{\begin{tabular}[c]{@{}l@{}}Exchange rate\\ in USD/BTC\end{tabular}} & 52,056.36 & 19,201.09 \\ \midrule
-\textbf{\begin{tabular}[c]{@{}l@{}}Rental attack cost\\ in USD/h\end{tabular}} & \begin{tabular}[c]{@{}r@{}}2,331,552.47\\ Messari: 2,754,271.39\end{tabular} & \begin{tabular}[c]{@{}r@{}}735,497.75\\ Crypto51: 716,072.00\end{tabular} \\ \bottomrule
-\end{tabular}
-\caption*{Estimate of costs of rental attacks on Bitcoin}
-\label{tab:my-table}
+	\small
+	\centering
+	\begin{tabular}{@{}lrr@{}}
+		\toprule
+		 & \multicolumn{1}{l}{\textbf{2021-02-22}} & \multicolumn{1}{l}{\textbf{2020-12-02}} \\ \midrule
+		\textbf{\begin{tabular}[c]{@{}l@{}}Total hash rate\\ in PH/s\end{tabular}} & 143,324.81 & \begin{tabular}[c]{@{}r@{}}114,915.00\end{tabular} \\ \midrule
+		\textbf{\begin{tabular}[c]{@{}l@{}}Rental prices\\ in BTC/PH/s/d\end{tabular}} & 0.0075 & \begin{tabular}[c]{@{}r@{}}0.008\end{tabular} \\ \midrule
+		\textbf{\begin{tabular}[c]{@{}l@{}}Exchange rate\\ in USD/BTC\end{tabular}} & 52,056.36 & 19,201.09 \\ \midrule
+		\textbf{\begin{tabular}[c]{@{}l@{}}Rental attack cost\\ in USD/h\end{tabular}} & \begin{tabular}[c]{@{}r@{}}2,331,552.47\\ Messari: 2,754,271.39\end{tabular} & \begin{tabular}[c]{@{}r@{}}735,497.75\\ Crypto51: 716,072.00\end{tabular} \\ \bottomrule
+	\end{tabular}
+	\caption*{Estimate of costs of rental attacks on Bitcoin}
+	% \label{tab:my-table}
 \end{table}
 
 What is striking about these numbers is that the hourly price of a rental attack increases from hundreds of thousands of dollars to a single-digit million dollar figure in a matter of months.
@@ -443,9 +442,9 @@ Nodes $n_2$ and $n_3$ require consensus with each other, thereby they both have 
 Then, $\{n_2, n_3\}$ is a quorum, while $\{n_1, n_2\}$ is not, because it lacks a quorum slice of $n_2$.
 \\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-06.svg}
-\caption*{Quorum slices and a quorum}
+	\centering
+	\includesvg{figures/figure-06.svg}
+	\caption*{Quorum slices and a quorum}
 \end{figure}
 
 Furthermore, two nodes $n_1$ and $n_2$ are considered ``intertwined'' ``when every quorum of [$n_1$] intersects every quorum of [$n_2$] in at least one non-faulty node.'' \autocite[4]{lokhava2019}
@@ -464,9 +463,9 @@ Since the intricacies of SCP are complex and far beyond the scope of this paper,
 It simply conceptualizes SCP as a ``funnel'' that narrows down an infinite set of values to a single one:
 \\
 \begin{figure}[H]
-\centering
-\includesvg{figures/figure-07.svg}
-\caption*{SCP as a funnel \autocite{stellar2019intuitivescp}}
+	\centering
+	\includesvg{figures/figure-07.svg}
+	\caption*{SCP as a funnel \autocite{stellar2019intuitivescp}}
 \end{figure}
 
 It is, however, crucial to take a closer look at SCP's properties and how they compare to PoW.
@@ -474,12 +473,11 @@ A ``multiprocess program'' typically defines ``two essentially different types o
 SCP defines these as follows:
  
 \begin{description}
-\item[Safety]
-``A Byzantine agreement protocol is safe when no two well-behaved nodes output different decisions and the unique decision was a valid input.'' \autocite[3]{lokhava2019}
-The former property is referred to as ``agreement'' and the latter as ``validity.'' \autocite{mazieres2019safetyvsliveness}
-\item[Liveness]
-``A protocol is live when it guarantees that every honest node eventually outputs a decision.''
-\autocite[4]{lokhava2019}
+	\item[Safety]
+		``A Byzantine agreement protocol is safe when no two well-behaved nodes output different decisions and the unique decision was a valid input.'' \autocite[3]{lokhava2019}
+		The former property is referred to as ``agreement'' and the latter as ``validity.'' \autocite{mazieres2019safetyvsliveness}
+	\item[Liveness]
+		``A protocol is live when it guarantees that every honest node eventually outputs a decision.'' \autocite[4]{lokhava2019}
 \end{description}
 
 ``Unfortunately, achieving all three of safety, guaranteed termination [i.e., liveness], and fault tolerance turns out to be impossible.'' \autocite{mazieres2019safetyvsliveness}
@@ -499,14 +497,14 @@ Assume the following scenario, taken again from the Stellar Developers blog \aut
 The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the EBC's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with.
 
 \begin{enumerate}
-\item
-Alice spends her 100 e-EUR by transferring them to some Bob, receiving some goods in return.
-\item
-The ``[i]ssuer’s [i.e., the ECB's] quorum set purposefully omits that transaction from a new block,'' so the ECB is not aware that these 100 e-EUR are now V's.
-\item
-Alice transfers the 100 e-EUR to the ECB for redemption, which still believes the 100 e-EUR are Alice's.
-\item
-The ECB pays Alice 100€.
+	\item
+		Alice spends her 100 e-EUR by transferring them to some Bob, receiving some goods in return.
+	\item
+		The ``[i]ssuer’s [i.e., the ECB's] quorum set purposefully omits that transaction from a new block,'' so the ECB is not aware that these 100 e-EUR are now V's.
+	\item
+		Alice transfers the 100 e-EUR to the ECB for redemption, which still believes the 100 e-EUR are Alice's.
+	\item
+		The ECB pays Alice 100€.
 \end{enumerate}
 
 Stellar introduces a very simple solution to this issue:

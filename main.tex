@@ -8,12 +8,12 @@
 
 % \usepackage{showframe}
 \usepackage[
-  a4paper,
-  top      = 20mm,
-  bottom   = 20mm,
-  right    = 40mm,
-  left     = 30mm,
-  footskip = 10mm
+	a4paper,
+	top      = 20mm,
+	bottom   = 20mm,
+	right    = 40mm,
+	left     = 30mm,
+	footskip = 10mm
 ]{geometry}
 \sloppy
 
@@ -43,13 +43,13 @@
 
 \usepackage{listings}
 \lstset{
-  basicstyle   = \ttfamily\footnotesize,
-  numberstyle  = \ttfamily\footnotesize,
-  breaklines   = true,
-  numbers      = left,
-  xleftmargin  = .1\textwidth,
-  xrightmargin = .07\textwidth,
-  frame        = lrtb
+	basicstyle   = \ttfamily\footnotesize,
+	numberstyle  = \ttfamily\footnotesize,
+	breaklines   = true,
+	numbers      = left,
+	xleftmargin  = .1\textwidth,
+	xrightmargin = .07\textwidth,
+	frame        = lrtb
 }
 \usepackage{float}
 \usepackage{svg}
@@ -70,8 +70,8 @@
 % ---------- ---------- ---------- ---------- ---------- %
 
 \usepackage[
-  backend = biber,
-  style   = verbose-ibid
+	backend = biber,
+	style   = verbose-ibid
 ]{biblatex}
 \bibliography{references}
 \setlength\bibitemsep{\parskip}
@@ -88,47 +88,47 @@
 
 \begin{document}
 
-  \input{titlepage}
-  
-  \pagenumbering{roman}
-  %\pagenumbering{gobble}
+	\input{titlepage}
 
-  \chapter*{Abstract}
-  \input{chapters/abstract}
-  
-  \renewcommand\contentsname{Table of contents}
-  \tableofcontents
-  
-  \cleardoublepage
-  \pagenumbering{arabic}
-  
-  \chapter{Introduction}
-  \input{chapters/chapter-01-introduction}
-  
-  \chapter{Prerequisites}
-  \input{chapters/chapter-02-prerequisites}
-  
-  \chapter{How is finality defined in the literature?}
-  \input{chapters/chapter-03-finality-definition}
-  
-  \chapter{Can blockchain systems provide legal finality?}
-  \input{chapters/chapter-04-legal-finality-of-blockchain}
-  
-  \chapter{Can blockchain systems provide technical finality?}
-  \input{chapters/chapter-05-technical-finality-of-blockchain}
-  
-  \chapter{Conclusion}
-  \input{chapters/chapter-06-conclusion}
-  
-  \printbibliography[
-    heading = bibintoc,
-    title   = {References}
-  ]
-  
-  \cleardoublepage
-  \pagenumbering{gobble}
-  
-  \chapter*{Eidesstattliche Erklärung}
-  \input{chapters/disclaimer}
+	\pagenumbering{roman}
+	%\pagenumbering{gobble}
+
+	\chapter*{Abstract}
+	\input{chapters/abstract}
+
+	\renewcommand\contentsname{Table of contents}
+	\tableofcontents
+
+	\cleardoublepage
+	\pagenumbering{arabic}
+
+	\chapter{Introduction}
+	\input{chapters/chapter-01-introduction}
+
+	\chapter{Prerequisites}
+	\input{chapters/chapter-02-prerequisites}
+
+	\chapter{How is finality defined in the literature?}
+	\input{chapters/chapter-03-finality-definition}
+
+	\chapter{Can blockchain systems provide legal finality?}
+	\input{chapters/chapter-04-legal-finality-of-blockchain}
+
+	\chapter{Can blockchain systems provide technical finality?}
+	\input{chapters/chapter-05-technical-finality-of-blockchain}
+
+	\chapter{Conclusion}
+	\input{chapters/chapter-06-conclusion}
+
+	\printbibliography[
+		heading = bibintoc,
+		title   = {References}
+	]
+
+	\cleardoublepage
+	\pagenumbering{gobble}
+
+	\chapter*{Eidesstattliche Erklärung}
+	\input{chapters/disclaimer}
 
 \end{document}

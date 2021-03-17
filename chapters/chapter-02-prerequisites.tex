@@ -27,9 +27,12 @@ Settlement on a net basis is preceded by the process of netting, which is a clea
 Netting is ``[t]he offsetting of obligations between or among participants in the netting arrangement'' \autocite[12]{bis2016cpmiglossary}, which is commonly explained \autocites[39]{vereecken2003}[21-24]{megue2018} using an example similar to the following:
 
 \begin{enumerate}
-   \item At 10:00, participant A transfers 8,000€ to participant B.
-   \item At 13:00, participant A transfers 5,000€ to participant B.
-   \item At 16:00, participant B transfers 3,000€ to participant A.
+	\item
+		At 10:00, participant A transfers 8,000€ to participant B.
+	\item
+		At 13:00, participant A transfers 5,000€ to participant B.
+	\item
+		At 16:00, participant B transfers 3,000€ to participant A.
 \end{enumerate}
 
 At the three designated times, no actual value is transferred, as clearing is concerned with information only.
@@ -232,12 +235,16 @@ He, furthermore, adds that smart contracts ``reference [...] property in a dynam
 After several iterations of ``refinement,'' Szabo presents an exemplary ``smart lien protocol,'' i.e., a smart contract, to formalize a how ``car is being used to secure credit'' -- a matter that, traditionally, ``would create a headache for the creditor,'' as the ``the repo man would no longer be able to confiscate a deadbeat's car'': \autocite{uva1997smartcontracts}
 
 \begin{quote}
-  \begin{enumerate}
-    \item A [car] lock to selectively let in the owner and ex[c]lude third parties;
-    \item A back door to let in the creditor;
-    \item[3.a.] Creditor back door switched on only upon nonpayment for a certain period of time; and
-    \item[3.b.] The final electronic payment permanently switches off the back door.
-  \end{enumerate}
+	\begin{enumerate}
+		\item
+			A [car] lock to selectively let in the owner and ex[c]lude third parties;
+		\item
+			A back door to let in the creditor;
+		\item[3.a.]
+			Creditor back door switched on only upon nonpayment for a certain period of time; and
+		\item[3.b.]
+			The final electronic payment permanently switches off the back door.
+	\end{enumerate}
 \end{quote}
 
 % Blockchain technology enables decentralized enforcement of smart contracts.
@@ -270,8 +277,8 @@ Its title, ``Ethereum white paper: a next generation smart contract \& decentral
 The following excerpt of the Ethereum whitepaper is emblematic for Ethereum's view on smart contracts: \autocite[1]{blockchainlab2013ethereumwhitepaper}
 
 \begin{quote}
-  Commonly cited applications [of blockchain technology] include [...] ``smart contracts'' -- systems which automatically move digital assets according to arbitrary pre-specified rules.
-  For example, one might have a treasury contract of the form ``A can withdraw up to X currency units per day, B can withdraw up to Y per day, A and B together can withdraw anything, and A can shut off B's ability to withdraw.''
+	Commonly cited applications [of blockchain technology] include [...] ``smart contracts'' -- systems which automatically move digital assets according to arbitrary pre-specified rules.
+	For example, one might have a treasury contract of the form ``A can withdraw up to X currency units per day, B can withdraw up to Y per day, A and B together can withdraw anything, and A can shut off B's ability to withdraw.''
 \end{quote}
 
 Ethereum is, in many ways, similar to Bitcoin, most notably, Ethereum also leverages PoW to facilitate consensus, although, as part of the Eth2 upgrades \autocite{ethereum2021eth2}, it switches to an alternative consensus algorithm called proof of stake (PoS) \autocite{ethereum2020pos}.
@@ -300,7 +307,7 @@ To this end, the smart contract had to be simple, it had to place a task that is
 The resulting smart contract, dubbed \texttt{SplitPot}, represents the basic agreement between three participants to evenly split up all funds, i.e., ether, sent to the smart contract's account, which, traditionally, would most likely have involved some kind of trustee:
 \\
 \begin{figure}[H]
-\begin{lstlisting}
+	\begin{lstlisting}
 pragma solidity ^0.6.0;
 
 contract SplitPot {
@@ -318,8 +325,8 @@ contract SplitPot {
     }
   }
 }
-\end{lstlisting}
-\caption*{A smart contract representing a \texttt{SplitPot}}
+	\end{lstlisting}
+	\caption*{A smart contract representing a \texttt{SplitPot}}
 \end{figure}
 
 % \begin{minipage}{\textwidth}
@@ -356,14 +363,14 @@ As mentioned earlier, one of the most popular applications of smart contracts is
 In the Ethereum whitepaper, the following minimalist example of a ``token system in Serpant'' is given: \autocite[20]{blockchainlab2013ethereumwhitepaper}
 \\
 \begin{figure}[H]
-\begin{lstlisting}
+	\begin{lstlisting}
 def send(to, value):
   if self.storage[msg.sender] >= value:
     self.storage[msg.sender] =
       self.storage[msg.sender] - value
     self.storage[to] = self.storage[to] + value
-\end{lstlisting}
-\caption*{A smart contract representing a token system}
+	\end{lstlisting}
+	\caption*{A smart contract representing a token system}
 \end{figure}
 
 % \begin{minipage}{\linewidth}
@@ -399,8 +406,8 @@ Thus, one might wonder what the contribution of permissioned blockchains is at a
 A similar line of reasoning is presented by former JP Morgan researcher Stuart Popejoy with regards to Hyperledger Fabric, a popular, IBM-backed permissioned blockchain system: \autocite{thenextweb2019hyperledgerrealblockchain}
 
 \begin{quote}
-  IBM's definition of blockchain captures the distributed and immutable elements of blockchain but conveniently leaves out decentralized consensus -- that's because IBM Hyperledger Fabric doesn't require a true consensus mechanism at all.
-  Instead, it suggests using an ``ordering service'' called Kafka, but without enforced, democratized, cryptographically-secure voting between participants, you can’t really prove whether an agent tampers with the ledger. In effect, IBM’s ``blockchain'' is nothing more than a glorified time-stamped list of entries.
+	IBM's definition of blockchain captures the distributed and immutable elements of blockchain but conveniently leaves out decentralized consensus -- that's because IBM Hyperledger Fabric doesn't require a true consensus mechanism at all.
+	Instead, it suggests using an ``ordering service'' called Kafka, but without enforced, democratized, cryptographically-secure voting between participants, you can’t really prove whether an agent tampers with the ledger. In effect, IBM’s ``blockchain'' is nothing more than a glorified time-stamped list of entries.
 \end{quote}
 
 All this is not to deny that permissioned blockchain systems do add value.
