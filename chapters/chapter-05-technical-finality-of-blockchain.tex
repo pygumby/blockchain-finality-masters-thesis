@@ -401,8 +401,8 @@ For Ethereum, the acquisition of Radeon Rx Vega 56 GPUs, each performing 36 MH/s
 Assuming the then-current total hash rate of 100 GH/s, ``roughly \$1.5 billion [...] build enough capacity to take over the Ethereum blockchain.''
 The fact that both building attacks are valued at \$1.5 billion -- despite Bitcoin's much higher total market value -- is assumed to be due to more investment in Ethereum mining equipment, which, in turn, is assumed to be due to higher relative revenues and the ability to mine using non-specialized hardware. \autocite[96]{bonneau2013}
 
-In the context of extrinsically incentivized attacks on PoW-based blockchain systems, it must be mentioned that these  can also be negatively affected by measures that are not even directed at them in the first place.
-E.g., a nation state could close off its domestic internet from the rest of the world, thereby not only partitioning the Internet but also, as a consequence, partitioning any PoW-based network based on it.
+In the context of extrinsically incentivized attacks on PoW-based blockchain systems, it must be mentioned that these can also be negatively affected by measures that are not even directed at them in the first place.
+E.g., a nation state could close off its domestic internet from the rest of the world, thereby not only partitioning the Internet but also, as a consequence, partitioning any PoW-based blockchain network based on it.
 
 This scenario is commonly discussed in the context of Bitcoin and China, as Chinese-operated mining pools have at times managed up to 74\% of Bitcoin's total hash rate, while, at the same time, China operates ``a variety of Internet control measures that can affect Bitcoin traffic,'' most notably ``the Great Chinese Firewall.'' \autocite[5]{kaiser2018}
 What would be the effect on Bitcoin with regards to transaction reversal if China were to close off its internet?
@@ -492,7 +492,7 @@ With PoW, on the other hand, \enquote{\enquote{the chain must go on} even at the
 However, as Stellar allows for the issuance of alternative tokens referred to as ``stablecoins'' next to its native cryptocurrency token ``lumens'' (XLM), another finality-related vulnerability opens up, which Stellar tackles with its concept of ``issuer-enforced finality.''
 
 Assume the following scenario, taken again from the Stellar Developers blog \autocite{stellar2020ief}, with slight modifications.
-The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the EBC's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with.
+The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the ECB's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with.
 
 \begin{enumerate}
 	\item
@@ -515,7 +515,7 @@ On the other hand, such stablecoins are accessible within the decentralized netw
 This duality is reflected in Stellar's design goal ``to let entities (safely) issue digital representations of currencies with the certainty of a permissioned [i.e., centralized] network, but the interoperability of a permissionless [i.e., decentralized] network.'' \autocite{stellar2020ief}.
 
 This willingness to compromise and take the best of both worlds, centralized and decentralized, is not limited to Stellar's take on stablecoins but is emblematic of Stellar's philosophy in general.
-It is reflected in SCP as a whole, as SCP, like PoW, facilitates agreement between the nodes of a decentralized network, but, unlike PoW, discards the assumption of trustlessness and, instead, is based the principle of flexible trust.
+It is reflected in SCP as a whole, as SCP, like PoW, facilitates agreement between the nodes of a decentralized network, but, unlike PoW, discards the assumption of trustlessness and, instead, is based on the principle of flexible trust.
 
 While this means that Stellar is technically ``solving a different, weaker problem than Bitcoin,'' \autocite{hackernoon2018cryptocurrencyfinality} it cannot be overstated that in doing so, it manages to shed Bitcoin's greatest shortcoming, i.e., the fact that transaction reversal is embodied in its consensus algorithm PoW.
 This is not to mention that by discarding Bitcoin's assumption of trustlessness as well as its disdain for centralized institutions, Stellar also discards properties of Bitcoin that have been traced to right-wing ideology.
@@ -541,7 +541,7 @@ SCP is fundamentally different from PoW, as it is a type of FBA, which, in turn,
 However, like PoW, SCP enables agreement between the nodes of a decentralized network.
 It does so without the assumption of trustlessness, as SCP is based on nodes explicitly expressing trust in one another.
 Therefore, SCP can be said to solve a slightly weaker problem than PoW.
-The fact that SCP precludes transaction reversal can be traced to the design decision to favor consistency over availability -- as the Stellar network rather halts than have to nodes publish different ledgers, there is no need for a reorg, which, in turn, is why there are no transaction reversals.
+The fact that SCP precludes transaction reversal can be traced to the design decision to favor consistency over availability -- as the Stellar network rather halts than have two nodes publish different ledgers, there is no need for a reorg, which, in turn, is why there are no transaction reversals.
 
 To conclude, it must clearly be stated that PoW-based blockchain systems cannot theoretically and have not practically provided technical finality, since a transaction maintained by such a system is only ever probabilistically final, never absolutely.
 However, with SCP, there exists a consensus algorithm for blockchain systems that provides technical finality.
