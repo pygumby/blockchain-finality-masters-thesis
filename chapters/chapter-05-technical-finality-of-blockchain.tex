@@ -144,7 +144,7 @@ With regards to blockchain systems, consistency means that all nodes assume the 
 Availability means that non-failing nodes maintain a chain at all times, albeit not necessarily the correct one.
 Partition tolerance means that the system continues to operate when individual or clusters of nodes are unable to communicate over the peer-to-peer network.
 
-Since PoW-based blockchain technology appears to provide all three properties, ``[i]t seems that the CAP theorem is violated,'' but it really is not, as PoW-based blockchain systems only achieve a weak form of consistency, i.e., ``eventual consistency,'' where ``there can be a temporary disagreement between nodes on the final state, but it is eventually agreed upon.'' \autocite{bashir2020}
+Since PoW-based blockchain technology appears to provide all three properties, ``[i]t seems that the CAP theorem is violated,'' but it really is not, as PoW-based blockchain systems only achieve a weak form of consistency, i.e., ``eventual consistency,'' where ``there can be a temporary disagreement between nodes on the final state, but it is eventually agreed upon.'' \autocite[35]{bashir2020}
 This is because nodes only ever consider the longest chain they are aware of to be the correct one, while it is assumed that each node eventually learns of the truly longest chain.
 
 As a side note, later in this thesis, the notion that PoW-based blockchain systems are partition-tolerant is challenged as well.
@@ -167,7 +167,7 @@ However, since the Bitcoin network is decentralized, there is no ``bird's eye vi
 To use the words of a user in the Bitcoin community on Stack Exchange, ``[t]he problem with blockchain forks is that once they are resolved the only trace they leave is a log entry,'' \autocite{stackexchange2017bitcoinforks} referring to the logs of the individual node(s) that carried out the reorg in question.
 Thus, an answer to the above question cannot be given comprehensively but can only be approximated.
 
-It can be said that assuming normal operation, the occurrence of stale blocks is quite rare, as the Bitcoin block interval is 10 minutes while the median block propagation time in 2014/15 was 8.7 seconds. \autocite[7]{croman2016}
+It can be said that assuming normal operation, the occurrence of stale blocks is quite rare, as the Bitcoin block interval is 10 minutes while the median block propagation time in 2014/15 was 8.7 seconds. \autocite[111]{croman2016}
 In 2016, ETH Zürich researchers reported Bitcoin's stale block rate at 0.41\%, measured over 10000 blocks. \autocite[3]{gervais2016}
 This corresponds to roughly 18 stale block per month.
 The nodes of BitMEX's ForkMonitor pick up fewer than that, e.g., creating only four ``stale block candidates'' alerts in 12/2020 and 01/2021, respectively. \autocite{forkmonitor2021staleblocks}
