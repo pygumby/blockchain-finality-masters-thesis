@@ -194,7 +194,7 @@ In other words, such an update causes the blockchain to fork.
 
 In the case of a softfork, the not-updated nodes accept the blocks created by the updated nodes, i.e., a softfork is backwards-compatible.
 Therefore, a chain split created by a softfork will eventually resolve, since either branch $i$ or branch $i'$ will eventually become the longest and universally accepted chain.
-However, the “losing chain” will become stale, reversing all its transactions.
+However, the ``losing chain'' will become stale, reversing all its transactions.
 
 Hardforks, by contrast, are not backwards compatible, i.e., the not-updated nodes reject the blocks created by the updated nodes.
 Consequently, a chain split created by a hardfork will never resolve, both chains will simply grow independently of one another.
