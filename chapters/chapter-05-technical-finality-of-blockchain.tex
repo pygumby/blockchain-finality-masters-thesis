@@ -80,7 +80,7 @@ One key metric is the amount of processing power that is in the hands of ``hones
 The more processing power an attacker has in relation to all other miners in the network, which are assumed to be honest, i.e., the larger an attacker's share of the total hash rate is, the faster they can mine their own chain in relation to the speed at which all other miners work on the main chain.
 And the faster they can mine their own chain, the more likely it is that it eventually overtakes the main chain, enabling the attacker to void any transaction contained in the latter.
 
-The Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby $p$ is the ``probability an honest node finds the next block,'' $q$ is the probability an attacker does so and $z$ is the number of ``blocks [that] have been linked after [the block containing the transaction in question].''
+The Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby $p$ is the ``probability an honest node finds the next block,'' $q$ is the probability an attacker does so and $z$ is the number of ``blocks [that] have been linked after [the block containing the transaction in question]'': \autocite[6,7,8]{bitcoin2008paper}
 
 \begin{quote}
 	Given our assumption that $p > q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. [...]
@@ -251,7 +251,7 @@ The preceding remarks show that the property of PoW-based blockchain systems to 
 However, these incidents were benign, a majority hash rate only came together to reverse the effects of bugs or attacks, preventing the respective system from breaking.
 Thus, the question arises whether and how a majority hash rate can be attracted by malignant motives.
 
-Relevant with regards to this is a landmark paper in the field of blockchain security, ``Majority is not enough: Bitcoin mining is vulnerable,'' \autocite{eyal2014} in which  Cornell researchers show that mining honestly by following the protocol proposed in the Bitcoin paper rather than gaming a PoW-based blockchain system is not economically rational and that, therefore, such systems are not ``incentive compatible.''
+Relevant with regards to this is a landmark paper in the field of blockchain security, ``Majority is not enough: Bitcoin mining is vulnerable,'' \autocite{eyal2014} in which  Cornell researchers show that mining honestly by following the protocol proposed in the Bitcoin paper rather than gaming a PoW-based blockchain system is not economically rational and that, therefore, such systems are not ``incentive compatible.'' \autocite[1]{eyal2014}
 
 In said paper, a strategy called ``selfish mining'' is proposed, which assumes that there are two mining pools, one consisting of selfish miners and one consisting of honest ones.
 The basic idea is, roughly speaking, that it is more profitable for selfish miners to not broadcast blocks they create to the network but keep them private, tricking honest miners into wasting computational power, i.e., money, as those keep working on building on top of previous blocks.
@@ -321,17 +321,17 @@ Selfish mining compares to this as follows:
 In any case, the selfish miners' relative revenue increases asymptotically with their relative hash rate, reaching 100\% of total revenue with only 50\% of the total hash rate.
 Furthermore, as one of the authors points out in a talk at the Israel Institute for Advanced Studies \autocite{youtube2018alternativestotonakamotoconsensus}, ``you can get $\gamma$ to be fairly high,'' as ``you can fracture the network,'' referring to the 2013-paper ``Information Propagation in the Bitcoin Network.'' \autocite{decker2013}
 
-Most scary, however, is the observation that it is rational for miners to  ``join the selfish pool to increase their revenues.''
+Most scary, however, is the observation that it is rational for miners to  ``join the selfish pool to increase their revenues.'' \autocite{youtube2018alternativestotonakamotoconsensus}
 In the aforementioned talk, ``pool formation'' is described as follows:
 ``Suppose I am a 10\% [of the total hash rate] miner, and I could go selfish and make, say, 11\% [of the total revenue].
 Suppose you are a 10\% miner, and you could go selfish. [...]
 If you compete with me, we're going to start knocking each other out.
 But [...] if we join forces [...] we get a bonus, we go from 11\% for 10\% to 23\% for 20\%. [...]
-This is absolutely horrible.''
+This is absolutely horrible.'' \autocite{youtube2018alternativestotonakamotoconsensus}
 
 While this constitutes an incentive to join selfish mining pools, pool formation can also be explained by the disincentive to remain honest, I may add.
 After all, the additional income of the selfish miners is to the detriment of the honest miners, who are tricked into wasting work as they solve stale problems.
-One way or another, ultimately, ``[t]he selfish pool would [...] increase in size, unopposed by any mechanism, until it becomes a majority.''
+One way or another, ultimately, ``[t]he selfish pool would [...] increase in size, unopposed by any mechanism, until it becomes a majority.'' \autocite{youtube2018alternativestotonakamotoconsensus}
 
 With selfish mining incentivizing the formation of ever-growing pools of selfish miners, the question arises whether selfish mining has actually occurred in practice and whether it has lead to the formation of pools holding a majority hash rate.
 The authors of the selfish mining paper respond to this \autocite{hackingdistributed2014detectselfishminers} by stating that the two ``distinct network signatures of selfish mining'' are the ``[n]umber of abandoned (orphaned) blocks,'' which, as mentioned before, is very hard to establish, as ``abandoned blocks are pruned inside the Bitcoin network,'' and the ``[t]iming of successive blocks,'' which bears difficulties as well, as ``timing gap analysis [...] is a statistical test, and it may take a fair bit of selfish mining activity before it detects that something is amiss.''
@@ -492,7 +492,7 @@ With PoW, on the other hand, \enquote{\enquote{the chain must go on} even at the
 However, as Stellar allows for the issuance of alternative tokens referred to as ``stablecoins'' next to its native cryptocurrency token ``lumens'' (XLM), another finality-related vulnerability opens up, which Stellar tackles with its concept of ``issuer-enforced finality.''
 
 Assume the following scenario, taken again from the Stellar Developers blog \autocite{stellar2020ief}, with slight modifications.
-The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the ECB's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with.
+The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the ECB's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with: \autocite{stellar2020ief}
 
 \begin{enumerate}
 	\item
