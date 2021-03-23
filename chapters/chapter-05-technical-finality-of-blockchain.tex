@@ -299,11 +299,13 @@ $\alpha$ denotes the relative mining power of the selfish miners and $1 - \alpha
 E.g., if $\alpha = 0.3$, the selfish miners chances of  leading by one block is 30\%, by two blocks 9\%, diminishing exponentially.
 $\gamma$ denotes the ratio of honest miners that accept and, thus, build on top of a block announced by the selfish miners and $1 - \gamma$ the ratio of honest miners that accept the competing honest miners' block.
 E.g., if $\gamma = 0$, honest miners will never mine on top of a block published by the selfish miners, if $\gamma = 1$, they always will.
+
+The state machine given in the selfish mining paper corresponds to a Markov chain, constituting a stochastic model: \autocite[8]{eyal2014}
 \\
 \begin{figure}[H]
 	\centering
 	\includesvg{figures/figure-05.svg}
-	\caption*{Markov chain modeling states and probabilities of selfish mining \autocite[8]{eyal2014}}
+	\caption*{Markov chain modeling states and probabilities of selfish mining}
 \end{figure}
 
 The profitability of selfish mining is presented in contrast to the profitability of mining as prescribed by the PoW algorithm, where a miner's relative computational power corresponds to the miner's relative revenue, e.g., a miner with 10\% of the total hash rate is expected to earn, on average, 10\% of the total revenue.
@@ -457,13 +459,12 @@ Federated voting is a protocol consisting of three stages, i.e., ``vote,'' ``acc
 However, federated voting ``might not terminate.'' \autocite[6]{lokhava2019}
 In each consensus round, SCP goes through two stages, i.e., ``nominate'' and ``balloting,'' both of which make use of federated voting. \autocite[5, 6]{lokhava2019}
 
-Since the intricacies of SCP are complex and far beyond the scope of this paper, it is, at this point, best to leave it at the following illustration, which is based on one published on the Stellar Developers blog. \autocite{stellar2019intuitivescp}
-It simply conceptualizes SCP as a ``funnel'' that narrows down an infinite set of values to a single one:
+Since the intricacies of SCP are complex and far beyond the scope of this paper, it is, at this point, best to leave it at the following illustration, which is based on one published on the Stellar Developers blog -- it simply conceptualizes SCP as a ``funnel'' that narrows down an infinite set of values to a single one: \autocite{stellar2019intuitivescp}
 \\
 \begin{figure}[H]
 	\centering
 	\includesvg{figures/figure-07.svg}
-	\caption*{SCP as a funnel \autocite{stellar2019intuitivescp}}
+	\caption*{SCP as a funnel}
 \end{figure}
 
 It is, however, crucial to take a closer look at SCP's properties and how they compare to PoW.
