@@ -80,7 +80,7 @@ One key metric is the amount of processing power that is in the hands of ``hones
 The more processing power an attacker has in relation to all other miners in the network, which are assumed to be honest, i.e., the larger an attacker's share of the total hash rate is, the faster they can mine their own chain in relation to the speed at which all other miners work on the main chain.
 And the faster they can mine their own chain, the more likely it is that it eventually overtakes the main chain, enabling the attacker to void any transaction contained in the latter.
 
-The Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby $p$ is the ``probability an honest node finds the next block,'' $q$ is the probability an attacker does so and $z$ is the number of ``blocks [that] have been linked after [the block containing the transaction in question]'': \autocite[6,7,8]{bitcoin2008paper}
+The Bitcoin paper presents some calculations on the probability of an attacker catching up with the ``honest chain,'' whereby $p$ is the ``probability an honest node finds the next block,'' $q$ is the probability an attacker does so and $z$ is the number of ``blocks [that] have been linked after [the block containing the transaction in question]'': \autocite[6, 7, 8]{bitcoin2008paper}
 
 \begin{quote}
 	Given our assumption that $p > q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. [...]
@@ -168,7 +168,7 @@ To use the words of a user in the Bitcoin community on Stack Exchange, ``[t]he p
 Thus, an answer to the above question cannot be given comprehensively but can only be approximated.
 
 It can be said that assuming normal operation, the occurrence of stale blocks is quite rare, as the Bitcoin block interval is 10 minutes while the median block propagation time in 2014/15 was 8.7 seconds. \autocite[111]{croman2016}
-In 2016, ETH Zürich researchers reported Bitcoin's stale block rate at 0.41\%, measured over 10000 blocks. \autocite[3]{gervais2016}
+In 2016, ETH Zürich researchers reported Bitcoin's stale block rate at 0.41\%, measured over 10,000 blocks. \autocite[3]{gervais2016}
 This corresponds to roughly 18 stale block per month.
 The nodes of BitMEX's ForkMonitor pick up fewer than that, e.g., creating only four ``stale block candidates'' alerts in 12/2020 and 01/2021, respectively. \autocite{forkmonitor2021staleblocks}
 
@@ -207,21 +207,21 @@ For the same reasons elaborated on before, this compilation cannot be considered
 	\item[Value overflow incident]
 		On August 15, 2010, a bug in the Bitcoin Core software was exploited to create a transaction that transferred roughly 184 billion bitcoins to three different addresses, although Bitcoin imposes a limit of roughly 21 million bitcoins to ever come into existence.
 		The underlying vulnerability was that integer overflows were not checked for.
-		After five hours, an update, i.e., a softfork, was rolled out to invalidate the respective block 74638.
-		Its containing chain was overtaken at block height 74691, thus, 53 blocks became stale.
+		After five hours, an update, i.e., a softfork, was rolled out to invalidate the respective block 74,638.
+		Its containing chain was overtaken at block height 74,691, thus, 53 blocks became stale.
 		\autocite{bitcoinwiki2016valueoverflowincident}
 		This is likely the longest chain to ever be orphaned in Bitcoin.
 	\item[Database switch incident]
 		On March 11, 2013, miners running version 0.8 of the Bitcoin software created blocks that were rejected by nodes running earlier versions.
 		Version 0.8 switched the underlying database from BerkeleyDB to LevelDB, inadvertently introducing an incompatibility, thus, constituting an accidental hardfork.
-		The blockchain forked at block height 225430.
-		After miners were asked to switch back to version 0.7, the majority hash rate backed the ``version 0.7 chain,'' and the blockchain reconverged at block height 225454, causing 24 blocks to become stale.
+		The blockchain forked at block height 225,430.
+		After miners were asked to switch back to version 0.7, the majority hash rate backed the ``version 0.7 chain,'' and the blockchain reconverged at block height 225,454, causing 24 blocks to become stale.
 		\autocite{bitcoinmag2013bitcoinfork}
 	\item[Invalid blocks incident]
 		On July 4, 2015, invalid blocks were created.
 		Miners failed to validate these and built on top of them, as ``[a]lmost all''  instances of the software ``besides Bitcoin Core 0.9.5 and later'' were unable to detect their invalidity. \autocite{bitcoin2015invalidblocks}
 		The latter versions implemented BIP66 \autocite{github2015bitcoinbip66} to no longer depend on OpenSSL's signature parsing, constituting a softfork.
-		The blockchain forked at block height 363731 and reconverged at block height 363737, causing 6 blocks to become stale.
+		The blockchain forked at block height 363,731 and reconverged at block height 363,737, causing 6 blocks to become stale.
 		\autocite{reddit2015bitcoininvalidblocks}
 \end{description}
 
@@ -396,8 +396,8 @@ For smaller PoW-based blockchain systems, especially if their hash algorithm doe
 E.g., in a 2017-paper, NYU researchers propose a rental attack on Ethereum, \autocite[95]{bonneau2013} estimating the cost of renting Nvidia K80 GPUs, each performing 50–100 MH/s, from AWS EC2 at ``\$1 million/h to perform a temporary takeover,'' adding that ``few hours of disruptive attacks could be sufficient to cause a major loss in value to the system, which has a market cap of almost \$30 billion.''
 
 Within the same publication, the costs of building attacks against Bitcoin and Ethereum are estimated as well. \autocite[95, 96]{bonneau2013}
-For Bitcoin, the acquisition of AntMiner S9 ASIC miners, each performing 14 TH/s at a purchase price of \$2000 and 1 kW energy consumption, is proposed.
-Assuming the then-current total hash rate of 1000 PH/s, ``roughly \$1.5 billion would build enough capacity to take over the Bitcoin blockchain.''
+For Bitcoin, the acquisition of AntMiner S9 ASIC miners, each performing 14 TH/s at a purchase price of \$2,000 and 1 kW energy consumption, is proposed.
+Assuming the then-current total hash rate of 1,000 PH/s, ``roughly \$1.5 billion would build enough capacity to take over the Bitcoin blockchain.''
 
 For Ethereum, the acquisition of Radeon Rx Vega 56 GPUs, each performing 36 MH/s at a purchase price of \$550, is proposed.
 Assuming the then-current total hash rate of 100 GH/s, ``roughly \$1.5 billion [...] build enough capacity to take over the Ethereum blockchain.''
