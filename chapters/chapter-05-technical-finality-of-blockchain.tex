@@ -1,5 +1,5 @@
 As the SFD and similar legislation implicitly assume payment systems to provide technical finality, i.e., to preclude transaction reversal on a technical level from a discrete point in time onward, it was hypothesized that blockchain systems are unable to achieve said technical finality.
-This chapter examines the theoretical and practical properties of PoW-based blockchain systems with regards to this, introduces alternative approaches and concludes with an assessment of whether blockchain systems can provide technical finality.
+This chapter examines the theoretical and practical properties of PoW-based blockchain systems with regards to this, introduces alternative approaches and concludes with an assessment on whether blockchain systems can provide technical finality.
 
 Note that up to this point, the term ``blockchain system'' referred to Bitcoin-style, PoW-based blockchain systems, as was declared in the prerequisites.
 In this chapter, however, the term refers to the category of systems in general, as different approaches to blockchain technology are discussed.
@@ -11,14 +11,14 @@ In the course of this, blockchain reorganization, i.e., the relevant part of PoW
 
 \subsection{Blockchain reorganization}
 
-For a better understanding of blockchain reorganization, reconsider relevant parts of blockchain technology:
+For a better understanding of blockchain reorganization, recap the purpose of blockchain technology:
 At their core, blockchain systems enable the nodes of a decentralized network to reach consensus on a certain value.
 In the particular case of Bitcoin, it is the transaction history, referred to as ledger, on which agreement is reached.
 The consensus algorithm proposed in the Bitcoin paper and employed in the live Bitcoin network is PoW.
 
 According to it, certain nodes referred to as miners bundle transactions they learn of into blocks.
 Miners expend computational power referred to as work to guess a so-called PoW for a block, i.e., a number that when hashed along with the block's data and the preceding block's hash results in a hash that starts with a number of zero bits.
-The fact that a block hash references the preceding block's hash shows that blocks form a conceptual chain, i.e., the blockchain.
+The fact that a block hash references the preceding block's hash shows that blocks form a conceptual chain, i.e., a blockchain.
 The number of preceding zero bits that is required reflects the network's current difficulty, which is adjusted continuously to ensure that on average every ten minutes a PoW is found on the network. 
 
 Once a miner finds a PoW for a block, it announces the block and its hash to the network.
@@ -123,7 +123,7 @@ Distributed web services are often categorized according to the CAP theorem, whi
 		In other words, network partitioning is present when ``all messages sent from nodes in one component of the partition to nodes in another component are lost.''
 \end{description}
 
-It must be pointed out that the Eric Brewer, the author of the original conjecture, later pointed out that the common interpretation of \enquote{\enquote{2 of 3} is misleading,} essentially stating that since distributed systems must deal with network partitioning in any case, they really can only choose between consistency and availability: \autocite{infoq2012caplater}
+It must be pointed out that Eric Brewer, the author of the original conjecture, later pointed out that the common interpretation of \enquote{\enquote{2 of 3} is misleading,} essentially stating that since distributed systems must deal with network partitioning in any case, they really can only choose between consistency and availability: \autocite{infoq2012caplater}
 
 \begin{quote}
 	The easiest way to understand CAP is to think of two nodes on opposite sides of a partition. Allowing at least one node to update state will cause the nodes to become inconsistent, thus forfeiting C.
@@ -151,17 +151,17 @@ As a side note, later in this thesis, the notion that PoW-based blockchain syste
 They are technically, but for the practical purposes of payment systems, they are not, at least so I argue.
 
 It can be summarized that since the nodes of a PoW-based blockchain system reach consensus on the correct chain over a unbounded period of time, i.e., reach consistency eventually, there is no discrete point in time at which a transaction can be said to be part of the ledger.
-This comes in addition to the fact that there is no guarantee it will not be removed from it later anyway, as has been established previously.
+This comes in addition to the fact that there is no guarantee it will not be removed from it later anyway, as has already been established previously.
 
 \section{Practical implications}
 
-In the following, the practical implications of the theoretical properties of PoW-based blockchain systems with regards to technical finality are described.
+In the following, the practical implications of the theoretical properties of PoW-based blockchain systems with regards to technical finality are analyzed.
 In the course of this, incidents of forking in such systems are described as well as vulnerabilities of those that are incentivized both intrinsically and extrinsically.
 
 \subsection{Forking incidents}
 
 It was previously described that with the PoW consensus algorithm, the blockchain may fork due to the occurrence of two or more blocks at the same block height and that in the process of reconvergence, i.e., reorganization, blocks or chains of blocks become stale, reversing the transactions they contain.
-The obvious question, then, is to what extent this occurs in practice in Bitcoin, i.e., in the largest PoW-based blockchain system.
+The obvious question, then, is to what extent this actually occurs in Bitcoin, the largest PoW-based blockchain system.
 
 However, since the Bitcoin network is decentralized, there is no ``bird's eye view'' on it, which would be necessary to become aware of all forks.
 To use the words of a user in the Bitcoin community on Stack Exchange, ``[t]he problem with blockchain forks is that once they are resolved the only trace they leave is a log entry,'' \autocite{stackexchange2017bitcoinforks} referring to the logs of the individual node(s) that carried out the reorg in question.
@@ -169,16 +169,16 @@ Thus, an answer to the above question cannot be given comprehensively but can on
 
 It can be said that assuming normal operation, the occurrence of stale blocks is quite rare, as the Bitcoin block interval is 10 minutes while the median block propagation time in 2014/15 was 8.7 seconds. \autocite[111]{croman2016}
 In 2016, ETH Zürich researchers reported Bitcoin's stale block rate at 0.41\%, measured over 10,000 blocks. \autocite[3]{gervais2016}
-This corresponds to roughly 18 stale block per month.
+This corresponds to roughly 18 stale blocks per month.
 The nodes of BitMEX's ForkMonitor pick up fewer than that, e.g., creating only four ``stale block candidates'' alerts in 12/2020 and 01/2021, respectively. \autocite{forkmonitor2021staleblocks}
 
 Most incidents where two or more blocks exist on the same block height are less relevant in the context of finality, because most of these forks are resolved with the next block or so.
-Since it is customary to wait for six confirmations until a transaction is deemed final, the reversal of a transaction due to its containing block becoming stale will, in practice, only be perceived as a reversal unless said block had at least five blocks appended to it.
+Since it is customary to wait for six confirmations until a transaction is deemed final, the reversal of a transaction due to its containing block becoming stale will, in practice, only be perceived as a reversal if said block had at least five blocks appended to it.
 
 More relevant in the context of finality is the latter scenario, i.e., the orphaning not of an individual block but of an entire chain consisting of six or more blocks, as this constitutes the reversal of transactions that are considered final as per conventional wisdom.
-It cannot be overstated that in the Bitcoin system, this happened, and more than once.
+It cannot be overstated that in the Bitcoin system, this happened -- and more than once.
 
-Before listing such incidents, the concepts ``softfork'' \autocite{bitcoinwiki2018softfork} and ``hardfork'' \autocite{bitcoinwiki2019hardfork} must be introduced.
+Before listing such incidents, the concepts of a ``softfork'' \autocite{bitcoinwiki2018softfork} and a ``hardfork'' \autocite{bitcoinwiki2019hardfork} must be introduced.
 Both represent an update to the software run by the nodes of a blockchain system, e.g., Bitcoin Core \autocite{github2021bitcoin}.
 Updated nodes follow a rule that is not followed by not-updated nodes.
 Most often, as a result, certain blocks produced by not-updated nodes are no longer accepted as valid blocks by updated nodes.
@@ -197,7 +197,7 @@ Therefore, a chain split created by a softfork will eventually resolve, since ei
 However, the “losing chain” will become stale, reversing all its transactions.
 
 Hardforks, by contrast, are not backwards compatible, i.e., the not-updated nodes reject the blocks created by the updated nodes.
-Consequently, a chain split created by a hardfork will never resolve, both chains will simply grow independently of each another.
+Consequently, a chain split created by a hardfork will never resolve, both chains will simply grow independently of one another.
 Note that softforks can be utilized to undo accidental hardforks.
 
 With softforks and hardforks defined, find below a compilation of incidents where reorgs of the Bitcoin blockchain caused chains consisting of six or more blocks to become stale, i.e., incidents where transactions that were viewed as final were reversed.
@@ -229,15 +229,15 @@ For a more comprehensive compilation of such incidents, refer to BitMex's ``[mor
 
 Obviously, transaction reversal due to forks affects all PoW-based blockchain systems, not just Bitcoin.
 In 2016, Ethereum, the second largest blockchain system, suffered the most prominent chain split of all.
-Attackers exploited a bug in the DAO (``decentralized autonomous organization''), a venture capital fund based on smart contracts, stealing from it about 3.6 million ether, i.e., Ethereum's cryptocurrency, roughly \$50 million. \autocite[75]{dhillon2017}
+Attackers exploited a bug in the DAO (``decentralized autonomous organization''), a venture capital fund based on smart contracts, stealing from it about 3.6 million ether, i.e., Ethereum's cryptocurrency -- roughly \$50 million. \autocite[75]{dhillon2017}
 
 In the aftermath of the incident, ``over 90 percent of the hashrate signaled its support'' to issue a hardfork and subsequently back the chain on which ``funds were returned to investors as though the [DAO] organization had never existed,'' which is now Ethereum's main chain. \autocite[76]{dhillon2017}
 As some view this intervention as contradictory to the ``value propositions of the Ethereum platform,''  the original chain is still maintained, now known as ``Ethereum Classic.'' \autocite[76]{dhillon2017}
 
 What all these incidents have in common is that a small group of developers release an update and then a similarly small group of mining pool operators decide to throw their weight, i.e., the majority hash rate, behind it, ultimately causing the reversal of certain transactions previously believed to be final.
-Firstly, this shows that these systems are, in fact, rather centralized and, secondly, that these incidents amount to what technically are 51\% attacks, despite all good intentions.
+Firstly, this shows that these systems are, in fact, rather centralized and, secondly, that these incidents amount to what technically are 51\% attacks -- despite all good intentions.
 
-What sounds like an exaggeration is actually documented on the respective projects' web sites.
+What sounds like an exaggeration is actually documented plainly on the respective projects' web sites.
 E.g., in the wake of the database switch incident, influential Bitcoin Core contributor Pieter Wuille publicly instructs miners on which chain to extend, confidently adding that since mining pool ``BTCGuild is switching'' to it, the desired chain ``will get a majority hash rate soon.'' \autocite{bitcointalk2013databaseswitchincident}
 
 Given that individual mining pools have at times held the majority of the computational power in the entire Bitcoin system, e.g., mining pool ``GHash.io'' in 2014 \autocite[222]{boehme2015}, it should come as no surprise that all it takes to alter the blockchain, i.e., to reverse transactions, is the cooperation between few influential individuals.
@@ -248,13 +248,13 @@ These incidents were the result of well-intended initiatives that nonetheless am
 \subsection{Incentive incompatibility}
 
 The preceding remarks show that the property of PoW-based blockchain systems to discard any block as part of a reorg has already caused transaction reversal in practice.
-However, these incidents were benign, a majority hash rate only came together to reverse the effects of bugs or attacks, preventing the respective system from breaking.
+However, these incidents were benign -- a majority hash rate only came together to reverse the effects of bugs or attacks, preventing the respective system from breaking.
 Thus, the question arises whether and how a majority hash rate can be attracted by malignant motives.
 
 Relevant with regards to this is a landmark paper in the field of blockchain security, ``Majority is not enough: Bitcoin mining is vulnerable,'' \autocite{eyal2014} in which  Cornell researchers show that mining honestly by following the protocol proposed in the Bitcoin paper rather than gaming a PoW-based blockchain system is not economically rational and that, therefore, such systems are not ``incentive compatible.'' \autocite[1]{eyal2014}
 
 In said paper, a strategy called ``selfish mining'' is proposed, which assumes that there are two mining pools, one consisting of selfish miners and one consisting of honest ones.
-The basic idea is, roughly speaking, that it is more profitable for selfish miners to not broadcast blocks they create to the network but keep them private, tricking honest miners into wasting computational power, i.e., money, as those keep working on building on top of previous blocks.
+The basic idea is -- roughly speaking -- that it is more profitable for selfish miners to not broadcast blocks they create to the network but keep them private, tricking honest miners into wasting computational power, i.e., money, as those keep working on building on top of previous blocks.
 
 The proposed algorithm can be summarized as follows.
 The selfish miners maintain a private chain, while the honest miners work on the public chain.
@@ -292,7 +292,7 @@ This leads to two alternative scenarios:
 \end{figure}
 
 The selfish mining paper illustrates probabilities with the state machine depicted below, where the states $0, 1, ..., n$ correspond to the number of blocks that the selfish miners' private chain is ahead of the honest miners' public chain.
-The state $0'$ corresponds to scenario $1$ of the algorithm as outlined above.
+The state $0'$ corresponds to scenario 1 of the algorithm as outlined above.
 The three edges leading from state $0'$ to state $0$ correspond to the three scenarios 1(a), 1(b) and 1(c), respectively.
 
 $\alpha$ denotes the relative mining power of the selfish miners and $1 - \alpha$ that of the honest ones.
@@ -324,7 +324,7 @@ In any case, the selfish miners' relative revenue increases asymptotically with 
 Furthermore, as one of the authors points out in a talk at the Israel Institute for Advanced Studies \autocite{youtube2018alternativestotonakamotoconsensus}, ``you can get $\gamma$ to be fairly high,'' as ``you can fracture the network,'' referring to the 2013-paper ``Information Propagation in the Bitcoin Network.'' \autocite{decker2013}
 
 Most scary, however, is the observation that it is rational for miners to  ``join the selfish pool to increase their revenues.'' \autocite{youtube2018alternativestotonakamotoconsensus}
-In the aforementioned talk, ``pool formation'' is described as follows:
+In the same talk, ``pool formation'' is described as follows:
 ``Suppose I am a 10\% [of the total hash rate] miner, and I could go selfish and make, say, 11\% [of the total revenue].
 Suppose you are a 10\% miner, and you could go selfish. [...]
 If you compete with me, we're going to start knocking each other out.
@@ -337,9 +337,9 @@ One way or another, ultimately, ``[t]he selfish pool would [...] increase in siz
 
 With selfish mining incentivizing the formation of ever-growing pools of selfish miners, the question arises whether selfish mining has actually occurred in practice and whether it has lead to the formation of pools holding a majority hash rate.
 The authors of the selfish mining paper respond to this \autocite{hackingdistributed2014detectselfishminers} by stating that the two ``distinct network signatures of selfish mining'' are the ``[n]umber of abandoned (orphaned) blocks,'' which, as mentioned before, is very hard to establish, as ``abandoned blocks are pruned inside the Bitcoin network,'' and the ``[t]iming of successive blocks,'' which bears difficulties as well, as ``timing gap analysis [...] is a statistical test, and it may take a fair bit of selfish mining activity before it detects that something is amiss.''
-While the authors say that it probably did not take place yet, they, at the same time, imply that if it had, it would have been difficult to detect.
+While the authors say that it probably did not take place yet, they imply that if it had, it would have been difficult to detect.
 
-Be that as it may, what can be summarized is that, in addition to the fact that PoW not only allows for transaction reversal in theory but has enabled such incidents in practice, PoW is also incentive incompatible in that the rational strategy for miners is not only to game PoW-based blockchain systems but to coalesce in order to do so.
+Be that as it may, what can be summarized is that, in addition to the fact that PoW not only allows for transaction reversal in theory but has enabled such incidents in practice, PoW is also incentive incompatible in that the rational strategy for miners is to game PoW-based blockchain systems -- and to coalesce in order to do so.
 In other words, such systems incentivize the formation of an attacker pool that eventually holds a majority hash rate, at which point it can reverse any transaction.
 
 \subsection{Extrinsic incentives}
@@ -352,7 +352,7 @@ This incentive is already expressed in the Bitcoin paper: \autocite[4]{bitcoin20
 	He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
 \end{quote}
 
-This incentive presumably applies within the implied game-theoretic model, which is, however, limited in scope to the Bitcoin ecosystem.
+This incentive may apply within the implied game-theoretic model, which is, however, limited in scope to the Bitcoin ecosystem.
 Consequently, it does not take effect in the case of attackers whose incentives are extrinsic to said model and, therefore, irrespective of the cryptocurrency token's value.
 
 This aspect is all the more important in the context of the discussion on PoW-based blockchain technology to underpin mission-critical payment systems in major economies.
@@ -378,7 +378,7 @@ As can be seen from the table, my results roughly correspond to the data publish
 		\textbf{\begin{tabular}[c]{@{}l@{}}Exchange rate\\ in USD/BTC\end{tabular}} & 52,056.36 & 19,201.09 \\ \midrule
 		\textbf{\begin{tabular}[c]{@{}l@{}}Rental attack cost\\ in USD/h\end{tabular}} & \begin{tabular}[c]{@{}r@{}}2,331,552.47\\ Messari: 2,754,271.39\end{tabular} & \begin{tabular}[c]{@{}r@{}}735,497.75\\ Crypto51: 716,072.00\end{tabular} \\ \bottomrule
 	\end{tabular}
-	\caption*{Estimate of costs of rental attacks on Bitcoin}
+	\caption*{Cost estimates of rental attacks on Bitcoin}
 \end{table}
 
 What is striking about these numbers is that the hourly price of a rental attack increases from hundreds of thousands of dollars to a single-digit million dollar figure in a matter of months.
@@ -419,14 +419,14 @@ Furthermore, measures such as Internet censorship can have side effects on PoW-b
 
 \section{Possible solutions}
 
-In the following, Stellar, a blockchain system that provides technical finality are presented.
+In the following, Stellar, a blockchain system that does provide technical finality are presented.
 In the course of this, the Stellar Consensus Protocol is introduced, which, to the best of my knowledge, is the only system that does so without sacrificing decentralization.
 
 \subsection{Stellar Consensus Protocol}
 
 With Stellar, there exists one blockchain system that puts special emphasis on finality.
-Its consensus algorithm, the Stellar Consensus Protocol (SCP), guarantees so-called ``issuer-enforced finality'' without sacrificing  ``[o]pen membership'' \autocite[1]{lokhava2019}, a hallmark of decentralization.
-However, unlike PoW, which assumes a trustless environment, SCP is based on ``flexible trust'' \autocite[2]{mazieres2016scp}, thereby solving a slightly different problem than PoW.
+Its consensus algorithm, the Stellar Consensus Protocol (SCP), guarantees so-called ``issuer-enforced finality'' without sacrificing  ``[o]pen membership,'' \autocite[1]{lokhava2019} a hallmark of decentralization.
+However, unlike PoW, which assumes a trustless environment, SCP is based on ``flexible trust,'' \autocite[2]{mazieres2016scp} thereby solving a slightly different problem than PoW.
 
 SCP is ``a construction for,'' i.e., type of, federated Byzantine agreement (FBA), \autocite[2]{mazieres2016scp} which was introduced along with SCP and is, in turn, a generalization of traditional Byzantine agreement (BA) \autocite[5]{mazieres2016scp}.
 Traditional BA enables a set of $n$ nodes to reach consensus on one ``value of information'' by voting based on ``two-party messages,'' assuming $n \geq 3m + 1$, where $m$ is the number of ``faulty'' or malicious nodes. \autocite{lamport1980}
@@ -459,7 +459,7 @@ Federated voting is a protocol consisting of three stages, i.e., ``vote,'' ``acc
 However, federated voting ``might not terminate.'' \autocite[6]{lokhava2019}
 In each consensus round, SCP goes through two stages, i.e., ``nominate'' and ``balloting,'' both of which make use of federated voting. \autocite[5, 6]{lokhava2019}
 
-Since the intricacies of SCP are complex and far beyond the scope of this paper, it is, at this point, best to leave it at the following illustration, which is based on one published on the Stellar Developers blog -- it simply conceptualizes SCP as a ``funnel'' that narrows down an infinite set of values to a single one: \autocite{stellar2019intuitivescp}
+Since the intricacies of SCP are complex and go far beyond the scope of this paper, it is, at this point, best to leave it at the following illustration, which is based on one published on the Stellar Developers blog -- it simply conceptualizes SCP as a ``funnel'' that narrows down an infinite set of values to a single one: \autocite{stellar2019intuitivescp}
 \\
 \begin{figure}[H]
 	\centering
@@ -482,15 +482,15 @@ SCP defines these as follows:
 ``Unfortunately, achieving all three of safety, guaranteed termination [i.e., liveness], and fault tolerance turns out to be impossible.'' \autocite{mazieres2019safetyvsliveness}
 In SCP, this dilemma manifests itself in the fact that the increasing size of quorums is, on the one hand, conducive to safety, but, on the other hand, detrimental to liveness. \autocite{mazieres2019safetyvsliveness}
 
-SCP chooses to prioritize safety over liveness, as ``the consequences of a safety failure (namely double-spent digital money) are far worse than those of a liveness failure (namely delays in payments that anyway took days before Stellar).''
-Thus, people who run nodes are actively encouraged to ``select large quorum slices,'' which increases intertwinedness, which, in turn, is the aforementioned condition for SCP to guarantee agreement.
+SCP chooses to prioritize safety over liveness, as ``the consequences of a safety failure (namely double-spent digital money) are far worse than those of a liveness failure (namely delays in payments that anyway took days before Stellar).'' \autocite[4]{lokhava2019}
+Thus, people who run nodes are actively encouraged to ``select large quorum slices,'' which increases intertwinedness, which, in turn, is the aforementioned condition for SCP to guarantee agreement. \autocite[4]{lokhava2019}
 
 Speaking in terms of the CAP theorem, ``Stellar prefers consistency and partition resilience [i.e., partition tolerance] over liveness [i.e., availability].'' \autocite{stellar2019networkhalt}
 Thus, in practical terms, ``when faced with consensus uncertainty,'' SCP ``prefers to halt,'' which, as a side note, has happened in practice and generally requires nodes to reconfigure their quorum slices as a fix. \autocite{stellar2019networkhalt}
 With PoW, on the other hand, \enquote{\enquote{the chain must go on} even at the price of soft forks.} \autocite{stellar2019networkhalt}
 
-``As [nodes] add new blocks to their ledger history, they will never go back and change them,'' which is why SCP already precludes the transaction reversal scenarios discussed in the context of PoW.
-However, as Stellar allows for the issuance of alternative tokens referred to as ``stablecoins'' next to its native cryptocurrency token ``lumens'' (XLM), another finality-related vulnerability opens up, which Stellar tackles with its concept of ``issuer-enforced finality.''
+``As [nodes] add new blocks to their ledger history, they will never go back and change them,'' \autocite{stellar2020ief} which is why SCP precludes the previously discussed transaction reversal scenarios.
+However, as Stellar allows for the issuance of alternative tokens referred to as ``stablecoins'' next to its native cryptocurrency token ``lumens'' (XLM), another finality-related vulnerability opens up, which Stellar tackles with its concept of ``issuer-enforced finality.'' \autocite{stellar2020ief}
 
 Assume the following scenario, taken again from the Stellar Developers blog \autocite{stellar2020ief}, with slight modifications.
 The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alice attempts to double-spend with the help of the nodes in the ECB's, i.e., the issuer's, quorum set, which is quite an unrealistic assumption to begin with: \autocite{stellar2020ief}
@@ -507,19 +507,19 @@ The ECB has issued 100 tokens of their stablecoin ``e-EUR'' to Alice, which Alic
 \end{enumerate}
 
 Stellar introduces a very simple solution to this issue:
-The ``[i]ssuer makes clear to the world that nobody should believe they have e-EUR unless [the] [i]ssuer's [node] says they do.'' 
+The ``[i]ssuer makes clear to the world that nobody should believe they have e-EUR unless [the] [i]ssuer's [node] says they do.'' \autocite{stellar2020ief}
 This way, Bob would have never accepted Alice's payment to begin with, as the ECB had never confirmed it.
-``That is what [i]ssuer-[e]nforced [f]inality is.''
+``That is what [i]ssuer-[e]nforced [f]inality is.'' \autocite{stellar2020ief}
 
 On the one hand, issuer-enforced finality certainly is a centralized approach, as the operationality and integrity of stablecoins directly depend on that of their respective issuers.
 On the other hand, such stablecoins are accessible within the decentralized network that is Stellar.
-This duality is reflected in Stellar's design goal ``to let entities (safely) issue digital representations of currencies with the certainty of a permissioned [i.e., centralized] network, but the interoperability of a permissionless [i.e., decentralized] network.'' \autocite{stellar2020ief}.
+This duality is reflected in Stellar's design goal ``to let entities (safely) issue digital representations of currencies with the certainty of a permissioned [i.e., centralized] network, but the interoperability of a permissionless [i.e., decentralized] network.'' \autocite{stellar2020ief}
 
 This willingness to compromise and take the best of both worlds, centralized and decentralized, is not limited to Stellar's take on stablecoins but is emblematic of Stellar's philosophy in general.
 It is reflected in SCP as a whole, as SCP, like PoW, facilitates agreement between the nodes of a decentralized network, but, unlike PoW, discards the assumption of trustlessness and, instead, is based on the principle of flexible trust.
 
 While this means that Stellar is technically ``solving a different, weaker problem than Bitcoin,'' \autocite{hackernoon2018cryptocurrencyfinality} it cannot be overstated that in doing so, it manages to shed Bitcoin's greatest shortcoming, i.e., the fact that transaction reversal is embodied in its consensus algorithm PoW.
-This is not to mention that by discarding Bitcoin's assumption of trustlessness as well as its disdain for centralized institutions, Stellar also discards properties of Bitcoin that have been traced to right-wing ideology.
+This is not to mention that by discarding Bitcoin's assumption of trustlessness as well as its disdain for centralized institutions, Stellar also discards properties of Bitcoin that have been traced to extreme right-wing ideology.
 
 It can be summarized that Stellar supports absolute finality in the sense that its consensus algorithm, SCP, has no notion of transaction reversal, as it, unlike Bitcoin, favors consistency over availability, of which one has to be sacrificed in a distributed system according to the CAP theorem.
 This is the right choice with regards to finality in particular and payment systems in general, as ``it’s much better for a financial network to go offline temporarily than to produce permanent false or disputed results.'' \autocite{stellar2019networkhalt}
@@ -527,17 +527,17 @@ This is the right choice with regards to finality in particular and payment syst
 \section{Technical finality in blockchain systems}
 
 In the theoretical analysis of the PoW consensus algorithm, it became clear that transaction reversal is an integral part of it.
-It is the consequence of blockchain reorganization, which, in turn, is what enables the convergence of nodes to one chain after a chain split.
+It is the consequence of blockchain reorganization, which, in turn, is what enables the convergence of nodes on one chain after a chain split in the first place.
 Furthermore, it became clear that an attacker controlling a majority hash rate can exploit this mechanism to reverse any transaction by creating a new longest chain that does not contain it.
 The fact that individual nodes only eventually reorganize their blockchain according to the longest chain they are aware of causes PoW to be classified a system that favors availability over consistency according to the CAP theorem.
 This also implies that there is no discrete point in time at which a transaction begins to be considered part of the ledger -- this comes in addition to the fact that it can be removed from it later anyway.
 
-As to the practical implications of these findings, it must be noted that the reversal of transactions believed to be final in PoW-based blockchain systems is not only a theoretical possibility but a historical fact in most such systems, including Bitcoin and Ethereum.
+As to the practical implications of these findings, it must be noted that the reversal of transactions previously believed to be final in PoW-based blockchain systems is not only a theoretical possibility but a historical fact in most such systems, including Bitcoin and Ethereum.
 While the efforts that caused such reversals were, in fact, well intended in that they aimed at reversing actual attacks or software bugs, they technically amount to successfully carried out majority attacks.
 Furthermore, one must add that PoW is incentive incompatible, which is not least problematic because it incentivizes the formation of ever-growing, eventually majority-representing mining pools that game the system.
 PoW is also vulnerable to extrinsically motivated attacks, e.g., building attacks, which may come at \$1.5 billion for both Bitcoin and Ethereum, respectively, which is remarkable, given that the two systems, at the time of this writing, maintain tokens of a combined value just shy of \$1 trillion between them.
 
-As a possible solution for these problems, the Stellar system is described, since its consensus algorithm SCP precludes transaction reversal.
+The Stellar system poses a possible solution for these problems, since its consensus algorithm SCP precludes transaction reversal.
 SCP is fundamentally different from PoW, as it is a type of FBA, which, in turn, generalizes traditional BA, a voting-based consensus algorithm originally conceived for closed systems.
 However, like PoW, SCP enables agreement between the nodes of a decentralized network.
 It does so without the assumption of trustlessness, as SCP is based on nodes explicitly expressing trust in one another.
